@@ -1,6 +1,6 @@
 {
   "unit_tests": {
-    "passed": 32,
+    "passed": 41,
     "failed": 0
   },
   "official_downloads": [
@@ -200,13 +200,18 @@
       "Whole-archive SHA256 independently verified after both parts pass"
     ],
     "errors": [],
-    "assembled_sha256": "4cbac7e8570b0b7a3204f60ce256a82fd3b72980f7cb175e257ecafb101f0d48",
+    "assembled_sha256": "715a8eb29df9bf352685674574dc1818b92cad95f5527246cc0b1e6949fa3137",
     "modpack_manifest_sha256": "69e13bb9a33809edc53c11f1696bef9b3713e0b4c66f6fec7c507c89b1c2f9b2"
   },
   "runtime_auto": {
+    "folder_candidates": 7,
+    "multiple_candidates_require_selection": "PASS",
+    "candidate_labels_include_mod_count": true,
     "automatic_java17_selection": "PASS",
     "automatic_forge_selection": "PASS",
-    "install_button_visible_in_layout": "PASS",
+    "explicit_folder_selection": "PASS",
+    "install_button_visible_at_minimum_window": "PASS",
+    "title_identifies_r6": true,
     "install_invoked": false,
     "java_version": "17.0.15",
     "windowed_exe_java17_forge_exit_code": 0,
@@ -219,5 +224,21 @@
     "launcher_account_json_not_read": "PASS",
     "preview_before_apply": true,
     "new_directory_optional": true
+  },
+  "release": "r6",
+  "packaged_exe": {
+    "--self-test-java17": 0,
+    "--self-test-folders": 0,
+    "--self-test-download": 0,
+    "official_https": "WinHTTP download, byte count and SHA256 verified inside frozen EXE",
+    "live_profile_written": false
+  },
+  "windows_https": {
+    "transport": "WinHTTP / SChannel",
+    "certificate_validation": "Windows trust, hostname, validity and revocation checks enabled",
+    "certificate_ignore_flags": false,
+    "official_download_sha256_verified": true,
+    "failure_log": "domain, Windows code, TLS flags and reason; no full URL or personal paths",
+    "friend_network_retested": false
   }
 }

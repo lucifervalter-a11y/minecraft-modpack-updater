@@ -13,7 +13,7 @@ subprocess.run([sys.executable,'updater.py','--self-test'],cwd=root,check=True)
 subprocess.run([sys.executable,'-m','PyInstaller','--noconfirm','--clean','--onefile','--windowed','--name','Minecraft-Modpack-Updater','--add-data','manifest.json:.','--add-data','presets:presets','updater.py'],cwd=root,check=True)
 exe=root/'dist'/'Minecraft-Modpack-Updater.exe'
 subprocess.run([str(exe),'--self-test'],cwd=root,check=True,timeout=60)
-files=['updater.py','manifest.json','Start.cmd','README.md','LICENSE','test_updater.py','build_release.py','split_download.py','requirements-build.txt']
+files=['updater.py','native_http.py','manifest.json','Start.cmd','README.md','LICENSE','test_updater.py','build_release.py','split_download.py','requirements-build.txt']
 for label,include in [('Windows',[exe,root/'README.md',root/'LICENSE',root/'manifest.json']),('Source',[root/p for p in files]+list((root/'presets').iterdir()))]:
     path=downloads/f'Minecraft-Modpack-Updater-{label}.zip'
     with zipfile.ZipFile(path,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:

@@ -193,10 +193,10 @@ class UpdaterTests(unittest.TestCase):
             found=u.discover_runtime(self.root)
         self.assertEqual(found['forge'][0]['path'],str(own))
 
-    def test_auto_missing_runtime_gives_minecraft_1201_instruction(self):
+    def test_auto_missing_runtime_gives_official_java_install_instruction(self):
         with patch.dict(os.environ,{'APPDATA':str(self.base/'missing')}):found=u.discover_runtime(self.root)
         self.assertEqual(found['java'],[]);self.assertEqual(found['forge'],[])
-        self.assertIn('1.20.1',u.runtime_help(found));self.assertIn('один раз',u.runtime_help(found))
+        self.assertIn('Temurin 17',u.runtime_help(found));self.assertIn('не гарантирует',u.runtime_help(found))
 
     def test_auto_depth_limit(self):
         mc=self.base/'AppData/.minecraft';deep=mc/'runtime/a/b/c/d/e/f/g/bin/java.exe'
@@ -227,5 +227,81 @@ class UpdaterTests(unittest.TestCase):
         with patch.object(u,'read_json',guarded):
             self.install();u.rollback(self.root)
         for rel,data in sentinels.items():self.assertEqual((self.root/rel).read_bytes(),data)
+
+    def test_game_discovery_single_shared_root_selects_for_either_launcher(self):
+        app=self.base/'AppData';mc=app/'.minecraft';mc.mkdir(parents=True)
+        (mc/'accounts.json').write_bytes(b'NEVER READ');(mc/'launcher_profiles.json').write_bytes(b'NEVER READ')
+        with patch.dict(os.environ,{'APPDATA':str(app)}),patch.object(u,'read_json',side_effect=AssertionError('no JSON expected')):
+            found=u.discover_game_folders()
+        self.assertEqual(len(found['candidates']),1)
+        for launcher in ('TLauncher','Официальный Minecraft Launcher'):
+            self.assertEqual(u.choose_game_folder(u.game_folder_candidates(found,launcher)),str(mc))
+        self.assertEqual(found['candidates'][0]['mods'],0)
+
+    def test_game_discovery_multiple_requires_choice_and_counts_without_reading_jars(self):
+        app=self.base/'AppData';mc=app/'.minecraft';profile=mc/'versions/CustomPack';mods=profile/'mods';mods.mkdir(parents=True)
+        for name in ('one.jar','two.jar'):(mods/name).write_bytes(b'contents must not be read')
+        (profile/'CustomPack.json').write_text(json.dumps({'libraries':[{'name':'net.minecraftforge:fmlloader:1.20.1-47.4.10'}]}))
+        original=u.read_json
+        def guarded(path,*args):
+            self.assertEqual(path.name,'CustomPack.json');return original(path,*args)
+        with patch.dict(os.environ,{'APPDATA':str(app)}),patch.object(u,'read_json',guarded),patch.object(u,'metadata',side_effect=AssertionError('JAR content read')):
+            found=u.discover_game_folders()
+        self.assertEqual(len(found['candidates']),2);self.assertEqual(u.choose_game_folder(found['candidates']),'')
+        row=next(c for c in found['candidates'] if c['path']==str(profile))
+        self.assertEqual(row['mods'],2);self.assertIn('47.4.10',row['version'])
+        self.assertEqual(u.choose_game_folder(found['candidates'],str(profile)),str(profile))
+
+    def test_version_installation_without_own_mods_is_not_game_folder(self):
+        app,good,bad,outside,version=self.make_runtime_fixture()
+        with patch.dict(os.environ,{'APPDATA':str(app)}):found=u.discover_game_folders()
+        self.assertEqual(len(found['candidates']),1)
+        self.assertNotEqual(found['candidates'][0]['path'],str(version.parent))
+        self.assertIn('доступна',found['candidates'][0]['version'])
+
+    def test_selected_container_finds_custom_profile_but_not_saves(self):
+        container=self.base/'Games';pack=container/'Custom';(pack/'mods').mkdir(parents=True)
+        (pack/'mods/a.jar').write_bytes(b'not read')
+        secret=container/'saves/private/mods';secret.mkdir(parents=True);(secret/'private.jar').write_bytes(b'not read')
+        with patch.dict(os.environ,{'APPDATA':str(self.base/'missing')}):found=u.discover_game_folders(container)
+        self.assertEqual([c['path'] for c in found['candidates']],[str(pack)])
+
+    def test_game_discovery_rejects_symlink_profiles(self):
+        app=self.base/'AppData';versions=app/'.minecraft/versions';versions.mkdir(parents=True)
+        outside=self.base/'outside';(outside/'mods').mkdir(parents=True)
+        try:(versions/'linked').symlink_to(outside,target_is_directory=True)
+        except OSError:self.skipTest('symlinks unavailable')
+        with patch.dict(os.environ,{'APPDATA':str(app)}):found=u.discover_game_folders()
+        self.assertEqual(len(found['candidates']),1)
+
+    def test_game_discovery_does_not_search_unrelated_disk_tree(self):
+        app=self.base/'AppData';(app/'.minecraft').mkdir(parents=True)
+        outside=self.base/'Unrelated/game/mods';outside.mkdir(parents=True);(outside/'a.jar').write_bytes(b'not read')
+        with patch.dict(os.environ,{'APPDATA':str(app)}):found=u.discover_game_folders()
+        self.assertFalse(any('Unrelated' in c['path'] for c in found['candidates']))
+
+    def test_known_java17_vendor_folder_is_found(self):
+        programs=self.base/'Program Files';java=programs/'Eclipse Adoptium/jdk-17.0.15-hotspot/bin/java.exe'
+        java.parent.mkdir(parents=True);java.write_bytes(b'fixture')
+        with patch.dict(os.environ,{'APPDATA':str(self.base/'missing'),'ProgramFiles':str(programs)}),patch.object(u,'java_version',return_value='17.0.15'):
+            found=u.discover_runtime()
+        self.assertEqual([x['path'] for x in found['java']],[str(java)])
+
+    @unittest.skipUnless(os.name=='nt','Windows transport')
+    def test_tls_failure_logged_without_secrets_and_without_commit(self):
+        import native_http
+        spec=self.m['mods'][0]
+        with patch.object(native_http,'stream',side_effect=native_http.WindowsDownloadError(12175,'проверка TLS',8)):
+            with self.assertRaisesRegex(u.SafetyError,'cdn.modrinth.com'):u.download(spec,self.base/'download.jar')
+        log=json.loads((self.base/'download-error.json').read_text('utf-8'))
+        self.assertEqual(log['domain'],'cdn.modrinth.com');self.assertEqual(log['tls_flags'],8)
+        self.assertNotIn(str(self.base),json.dumps(log));self.assertFalse((self.root/'mods').exists())
+
+    @unittest.skipUnless(os.name=='nt','Windows transport')
+    def test_native_http_result_still_requires_sha256(self):
+        import native_http
+        def corrupt(url,stream,maximum):stream.write(b'x'*maximum);return maximum
+        with patch.object(native_http,'stream',corrupt):
+            with self.assertRaisesRegex(u.SafetyError,'SHA256'):u.download(self.m['mods'][0],self.base/'bad.jar')
 
 if __name__=='__main__':unittest.main(verbosity=2)

@@ -4,8 +4,13 @@
   "files": [
     {
       "path": "updater.py",
-      "bytes": 42076,
-      "sha256": "135ba7121e90c243eb32b2b509980530ca94ee1739c0520c9ae8a30c0780caa0"
+      "bytes": 55310,
+      "sha256": "6e9f0842989e5d55e27ab81f8385d04a5a70973a4c49c031833875c5dfc82333"
+    },
+    {
+      "path": "native_http.py",
+      "bytes": 5986,
+      "sha256": "8ea69fe5f23cb468dd4ae1a5f3c5e5308edf8950a680f7c9670d0930fd2c829e"
     },
     {
       "path": "manifest.json",
@@ -19,8 +24,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 14402,
-      "sha256": "a54f59597dc6a336e37a6552e35faa917edd8178f3ae7135cb8ebec1bae222a8"
+      "bytes": 17832,
+      "sha256": "ca91339ccf0db5f0747a88f9d5c3a76fe1a7e33ba9e2c5f6c98f9af01aa05601"
     },
     {
       "path": "LICENSE",
@@ -29,13 +34,13 @@
     },
     {
       "path": "test_updater.py",
-      "bytes": 15511,
-      "sha256": "df23b04ae7784189e7c31fa25ffce3b956072dd366479e3b5d36339765f9c0b6"
+      "bytes": 20994,
+      "sha256": "cf1010992bbb00628b39c1be0394c36ba9ab898c000a17f5a684b016337e921d"
     },
     {
       "path": "build_release.py",
-      "bytes": 1678,
-      "sha256": "7d5eabca3842de6c2d4c2d2dd741d02fc0b1c05fa663437efc5512949d6c1e3f"
+      "bytes": 1695,
+      "sha256": "c5253a00dfa1ac3651dec90f50d9b408e974113e480ec036f87774b76f172fc5"
     },
     {
       "path": "split_download.py",
@@ -54,8 +59,8 @@
     },
     {
       "path": "VERIFICATION.json",
-      "bytes": 7587,
-      "sha256": "e9337965c8306c7d29d4acad81cd3057bf6624058d4ff467f4fb1c376565194d"
+      "bytes": 8460,
+      "sha256": "13cdd93bd85debb955368e938935a193eb65a69ff84d8867f946c6028a4131e0"
     },
     {
       "path": "presets/appleskin-client.toml",
@@ -164,33 +169,33 @@
     },
     {
       "path": "docs/downloads/Minecraft-Modpack-Updater-Source.zip",
-      "bytes": 45253,
-      "sha256": "c40fd75d967418e7c5c02153874eadbd007f621bece73196c4565b13f4fba253"
+      "bytes": 53453,
+      "sha256": "66c98e3e66d06eaa0cdde8197c06c3cb468339ee4f57f2f349f41c222e4008ee"
     },
     {
       "path": "docs/downloads/Minecraft-Modpack-Updater-Windows.zip.part1",
-      "bytes": 6317044,
-      "sha256": "cc5fc1cea54fa06e78f8a3fe8e8c03af70cdcc16e64fdedeb631b5b2cb6f0abc"
+      "bytes": 6337066,
+      "sha256": "dccc6d423d37d9806b1f7d90b6164e4d1a73583abbcfc5bb76f29bac20ace01e"
     },
     {
       "path": "docs/downloads/Minecraft-Modpack-Updater-Windows.zip.part2",
-      "bytes": 6317044,
-      "sha256": "5ae0b0842a69ac436a498e89441a897daf9f9aac6ea05998353e303ccd415e24"
+      "bytes": 6337066,
+      "sha256": "275054ab8798992d774b652e3bea69885db3356b740ff63dc026cfd4833e4e78"
     },
     {
       "path": "docs/downloads/SHA256SUMS.txt",
       "bytes": 502,
-      "sha256": "53e4e195d862982623bf589f390bd9cfeb33f03dd733208838d3be56116caf30"
+      "sha256": "04e298adff11458f232f10c90d4b6602b79941cd7131b96d35a60a84296dc87f"
     },
     {
       "path": "docs/downloads/windows-download.json",
       "bytes": 567,
-      "sha256": "6956c35e2cf3fdfb5086ea7ba7e37d04fc5c5f931bd2a8164e36d335281a6e31"
+      "sha256": "e98cf01526db37797b360e71baac5182bf70c9c76136a14af0532d7eb33a4f86"
     },
     {
       "path": "docs/index.html",
-      "bytes": 10194,
-      "sha256": "2b6df8e95b325f08f25595dc2c57ab907647d49e3bc5a32e6eec5e0fd1cfa486"
+      "bytes": 10352,
+      "sha256": "37560f69d6911d294d0f37f9d585ec9372ddbfbd7c82d62ce706c11983af7149"
     },
     {
       "path": "docs/manifest.json",
