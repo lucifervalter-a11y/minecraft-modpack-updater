@@ -1,0 +1,28 @@
+# Added only when absent. Adjust position in game with the default O key.
+[inventoryhud]
+byDefault = false
+
+[armorhud]
+ArmorDamage = true
+showArmor = true
+showMain = true
+showOff = false
+showArrows = false
+showInv = false
+showEmpty = false
+showCount = false
+showArrowsWithoutWeapon = false
+armView = "DAMAGE_LEFT"
+armBars = true
+armScale = 100
+moveAll = true
+armWithDebug = false
+
+[potionshud]
+Potions = false
+
+[positions]
+armHalign = "RIGHT"
+armValign = "BOTTOM"
+xArmPos = 98
+yArmPos = 112

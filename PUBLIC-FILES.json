@@ -4,18 +4,18 @@
   "files": [
     {
       "path": "updater.py",
-      "bytes": 55310,
-      "sha256": "6e9f0842989e5d55e27ab81f8385d04a5a70973a4c49c031833875c5dfc82333"
+      "bytes": 60599,
+      "sha256": "6cbba3d19e79ad11dd4151b496ab9b75204518533cc8ce853494e770021b1558"
     },
     {
       "path": "native_http.py",
-      "bytes": 5986,
-      "sha256": "8ea69fe5f23cb468dd4ae1a5f3c5e5308edf8950a680f7c9670d0930fd2c829e"
+      "bytes": 6063,
+      "sha256": "19ee58a127f254cb9d33cab9c898e5a3abb3c80a87dbf3581f73683197e8f9a9"
     },
     {
       "path": "manifest.json",
-      "bytes": 23128,
-      "sha256": "69e13bb9a33809edc53c11f1696bef9b3713e0b4c66f6fec7c507c89b1c2f9b2"
+      "bytes": 25653,
+      "sha256": "c7242af5d845af5a9f9a940501d857a7d1d5f4b94810f2bb81f411dae11ac173"
     },
     {
       "path": "Start.cmd",
@@ -24,8 +24,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 17832,
-      "sha256": "ca91339ccf0db5f0747a88f9d5c3a76fe1a7e33ba9e2c5f6c98f9af01aa05601"
+      "bytes": 23712,
+      "sha256": "35a7911861f14271ed0fa02daf8928b4088d09b43b6e755ae2b8e48ae2577776"
     },
     {
       "path": "LICENSE",
@@ -34,8 +34,8 @@
     },
     {
       "path": "test_updater.py",
-      "bytes": 20994,
-      "sha256": "cf1010992bbb00628b39c1be0394c36ba9ab898c000a17f5a684b016337e921d"
+      "bytes": 23243,
+      "sha256": "f014c0c53ba6622f7e3b7bf49b6edc7f30fcacb88073d2c66724827e0f5cd531"
     },
     {
       "path": "build_release.py",
@@ -59,8 +59,8 @@
     },
     {
       "path": "VERIFICATION.json",
-      "bytes": 8460,
-      "sha256": "13cdd93bd85debb955368e938935a193eb65a69ff84d8867f946c6028a4131e0"
+      "bytes": 11771,
+      "sha256": "12d9f2a8a9940019ac87938b459da6edd3383b983be221d37662a69358756480"
     },
     {
       "path": "presets/appleskin-client.toml",
@@ -123,6 +123,11 @@
       "sha256": "a8448518860cd8b542dadf75521bfab981451775212ee1b51ddc646d998f9311"
     },
     {
+      "path": "presets/inventoryhud-client.toml",
+      "bytes": 491,
+      "sha256": "06c6450b606cda5a66f1d7cfc6d7d9542613d27cab31cd8c2bc16db9e5c703b8"
+    },
+    {
       "path": "presets/MouseTweaks.cfg",
       "bytes": 135,
       "sha256": "4069ce1a439d8c37453c1b1e9f2037e0942674c7e48723a39b37eab245792ad4"
@@ -169,38 +174,38 @@
     },
     {
       "path": "docs/downloads/Minecraft-Modpack-Updater-Source.zip",
-      "bytes": 53453,
-      "sha256": "66c98e3e66d06eaa0cdde8197c06c3cb468339ee4f57f2f349f41c222e4008ee"
+      "bytes": 58052,
+      "sha256": "c5ad0b798d746e26b14f345355c740845a959b7b500ab430c054654db9bb4d76"
     },
     {
       "path": "docs/downloads/Minecraft-Modpack-Updater-Windows.zip.part1",
-      "bytes": 6337066,
-      "sha256": "dccc6d423d37d9806b1f7d90b6164e4d1a73583abbcfc5bb76f29bac20ace01e"
+      "bytes": 6340362,
+      "sha256": "c878d7f81ee8a43d0127412946ff01da3659066c5a8c3ca3b992222e29b404c0"
     },
     {
       "path": "docs/downloads/Minecraft-Modpack-Updater-Windows.zip.part2",
-      "bytes": 6337066,
-      "sha256": "275054ab8798992d774b652e3bea69885db3356b740ff63dc026cfd4833e4e78"
+      "bytes": 6340362,
+      "sha256": "4f22fa4bacd5af82c39b3c62837bac31bba235135ca301cd2e465cd5301e4e23"
     },
     {
       "path": "docs/downloads/SHA256SUMS.txt",
       "bytes": 502,
-      "sha256": "04e298adff11458f232f10c90d4b6602b79941cd7131b96d35a60a84296dc87f"
+      "sha256": "3f2b08d6eb634070dbdd20c769e15997388ec04c3b836652117fd6a97d470888"
     },
     {
       "path": "docs/downloads/windows-download.json",
       "bytes": 567,
-      "sha256": "e98cf01526db37797b360e71baac5182bf70c9c76136a14af0532d7eb33a4f86"
+      "sha256": "542e52d5b166efce9f02e99ee3473bde764b411a3e48faceebba0311e2026875"
     },
     {
       "path": "docs/index.html",
-      "bytes": 10352,
-      "sha256": "37560f69d6911d294d0f37f9d585ec9372ddbfbd7c82d62ce706c11983af7149"
+      "bytes": 11906,
+      "sha256": "56b4746aa79b2e7c0b8b0c919c178d89720dc00ab08907598bf63f90e20185cf"
     },
     {
       "path": "docs/manifest.json",
-      "bytes": 23128,
-      "sha256": "69e13bb9a33809edc53c11f1696bef9b3713e0b4c66f6fec7c507c89b1c2f9b2"
+      "bytes": 25653,
+      "sha256": "c7242af5d845af5a9f9a940501d857a7d1d5f4b94810f2bb81f411dae11ac173"
     },
     {
       "path": "docs/style.css",

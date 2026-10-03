@@ -1,5 +1,5 @@
 # Windows ZIP is assembled by the download button from the two parts.
-715a8eb29df9bf352685674574dc1818b92cad95f5527246cc0b1e6949fa3137  Minecraft-Modpack-Updater-Windows.zip
-66c98e3e66d06eaa0cdde8197c06c3cb468339ee4f57f2f349f41c222e4008ee  Minecraft-Modpack-Updater-Source.zip
-dccc6d423d37d9806b1f7d90b6164e4d1a73583abbcfc5bb76f29bac20ace01e  Minecraft-Modpack-Updater-Windows.zip.part1
-275054ab8798992d774b652e3bea69885db3356b740ff63dc026cfd4833e4e78  Minecraft-Modpack-Updater-Windows.zip.part2
+f2811fe903fb4fd4359f4f4a5ed7dbccfdf2c1a6e17e64cd39d0aa353929c6b4  Minecraft-Modpack-Updater-Windows.zip
+c5ad0b798d746e26b14f345355c740845a959b7b500ab430c054654db9bb4d76  Minecraft-Modpack-Updater-Source.zip
+c878d7f81ee8a43d0127412946ff01da3659066c5a8c3ca3b992222e29b404c0  Minecraft-Modpack-Updater-Windows.zip.part1
+4f22fa4bacd5af82c39b3c62837bac31bba235135ca301cd2e465cd5301e4e23  Minecraft-Modpack-Updater-Windows.zip.part2

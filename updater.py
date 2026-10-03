@@ -20,7 +20,7 @@ import uuid
 import zipfile
 
 BASE = Path(getattr(sys, '_MEIPASS', Path(__file__).parent))
-MANIFEST_SHA256 = '69e13bb9a33809edc53c11f1696bef9b3713e0b4c66f6fec7c507c89b1c2f9b2'
+MANIFEST_SHA256 = 'c7242af5d845af5a9f9a940501d857a7d1d5f4b94810f2bb81f411dae11ac173'
 MANAGER = '.modpack-updater'
 STATE = MANAGER + '/state.json'
 SERVICE = 'META-INF/services/net.minecraftforge.forgespi.language.IModLanguageProvider'
@@ -62,9 +62,12 @@ def safe_path(path):
 
 def profile_path(value):
     p = safe_path(Path(value))
-    if not p.is_dir() or p == Path(p.anchor) or p.name.lower() in ('mods','config','saves','versions'):
+    mods = safe_path(p/'mods')
+    # A TLauncher game directory may itself be named Mods. Its child mods/
+    # distinguishes that game directory from the actual JAR directory.
+    named_mods_profile = p.name.lower()=='mods' and mods.is_dir()
+    if not p.is_dir() or p == Path(p.anchor) or (p.name.lower() in ('mods','config','saves','versions') and not named_mods_profile):
         raise SafetyError('Выберите папку игры, внутри которой находится mods. Не выбирайте саму mods, versions или корень диска. Для официального Launcher обычно подходит .minecraft.')
-    safe_path(p/'mods')
     safe_path(p/MANAGER)
     return p
 
@@ -139,7 +142,7 @@ def download(spec, dest):
             except OSError:pass
             raise SafetyError(f'Загрузка с {host} остановлена. WinHTTP {error.code}: {error.reason}. Проверка сертификатов сохранена. Проверьте дату Windows, обновления сертификатов и доступ к этому домену через свою сеть. Диагностика: download-error.json в папке backup этой операции. Отключать TLS-проверку не нужно.') from error
     else:
-        request=urllib.request.Request(spec['download_url'],headers={'User-Agent':'MinecraftModpackUpdater/r6'})
+        request=urllib.request.Request(spec['download_url'],headers={'User-Agent':'MinecraftModpackUpdater/r8'})
         opener=urllib.request.build_opener(NoRedirect());size=0
         with opener.open(request,timeout=45) as response, dest.open('xb') as output:
             while block:=response.read(1024*1024):
@@ -239,7 +242,29 @@ def inspect_profile(root, manifest):
         dest=target(root,spec['path'])
         if not dest.exists():
             ops[spec['path']]={'path':spec['path'],'before':None,'after':spec['sha256'],'bundled':spec['bundle']}
-    return {'root':root,'rows':rows,'ops':list(ops.values()),'managed':managed,'conflicts':conflicts,'outsiders':outsiders}
+    return {'root':root,'rows':rows,'ops':list(ops.values()),'managed':managed,'conflicts':conflicts,'outsiders':outsiders,'jar_count':len(inventory)}
+
+def verification_summary(plan, manifest):
+    count=len(manifest['mods']);mods=plan['rows'][:count];extras=plan['rows'][count:]
+    matched=sum(row['status']=='OK' for row in mods)
+    extra_matched=sum(row['status']=='OK' for row in extras)
+    complete=not plan['conflicts'] and all(row['status']=='OK' for row in plan['rows'])
+    label='Файлы набора проверены' if complete else 'Сборка НЕ готова'
+    summary=f"{label}: моды {matched}/{count}, дополнения {extra_matched}/{len(extras)}."
+    if plan['conflicts']:summary+=f" Конфликтов: {len(plan['conflicts'])}."
+    elif plan['ops']:summary+=f" Файлов для установки/обновления: {len(plan['ops'])}."
+    return summary
+
+def verification_receipt(plan, manifest, action, runtime, operation=''):
+    lines=['Minecraft Modpack Updater r8',time.strftime('Проверено: %Y-%m-%d %H:%M:%S UTC',time.gmtime()),
+        'Действие: '+action,'Набор: '+manifest['release'],'Папка игры: '+str(plan['root']),
+        'Папка модов: '+str(plan['root']/'mods'),f"JAR в выбранной папке: {plan['jar_count']}",
+        verification_summary(plan,manifest),'Java / Forge: '+runtime]
+    if operation:lines.append('Операция: '+operation)
+    lines.append('Проверка относится только к указанной папке; активная папка запущенного Minecraft автоматически не определялась.')
+    lines.extend(f"[{row['status']}] {row['name']} {row['version']}" for row in plan['rows'])
+    lines.extend('КОНФЛИКТ: '+entry for entry in plan['conflicts'])
+    return '\n'.join(lines)
 
 def java_version(java_path, timeout=15):
     java=safe_path(Path(java_path))
@@ -649,6 +674,9 @@ def apply(root, manifest, progress=lambda message:None, fetch=download):
                 if op['after'] is None: dest.unlink()
                 else: atomic_write(dest,(directory/(str(i)+'.after')).read_bytes())
                 if actual_hash(dest)!=op['after']: raise SafetyError('Ошибка проверки установленного файла')
+            verified=inspect_profile(root,manifest)
+            if verified['conflicts'] or verified['ops'] or any(row['status']!='OK' for row in verified['rows']):
+                raise SafetyError('Итоговая проверка не пройдена: после записи набор неполон или изменён. '+verification_summary(verified,manifest))
             journal['status']='complete'
             save_json(directory/'journal.json',journal)
         except Exception:
@@ -661,15 +689,15 @@ def gui():
     from tkinter import ttk,filedialog,messagebox
     import threading,queue
     m=load_manifest()
-    window=tk.Tk(); window.title('Minecraft • Обновлятор r6 • Поиск сборок'); window.geometry('990x870'); window.minsize(850,790)
+    window=tk.Tk(); window.title('Minecraft • Обновлятор r8 • Проверка сборки'); window.geometry('990x870'); window.minsize(850,790)
     style=ttk.Style(); style.theme_use('clam'); style.configure('.',font=('Segoe UI',10)); style.configure('Title.TLabel',font=('Segoe UI',21,'bold'))
     frame=ttk.Frame(window,padding=18); frame.pack(fill='both',expand=True)
-    ttk.Label(frame,text='Ваша сборка. Все моды на месте.',style='Title.TLabel').pack(anchor='w')
-    ttk.Label(frame,text='Minecraft 1.20.1  •  Forge 47.4.10  •  Java 17  •  23 мода',padding=(0,8,0,16)).pack(anchor='w')
+    ttk.Label(frame,text='Проверка и обновление сборки',style='Title.TLabel').pack(anchor='w')
+    ttk.Label(frame,text='Minecraft 1.20.1  •  Forge 47.4.10  •  Java 17  •  26 модов',padding=(0,8,0,16)).pack(anchor='w')
     launcher=tk.StringVar(value='Все лаунчеры'); folder=tk.StringVar(); java=tk.StringVar(); version=tk.StringVar()
     folder_view=tk.StringVar(value='Ищем установленные сборки…');folder_scope=[None]
     folder_note=tk.StringVar(value='Папки будут найдены автоматически. Запись начнётся только после подтверждения.')
-    folder_choices={};folder_details={}
+    folder_choices={};folder_details={};last_receipt=['']
     java_view=tk.StringVar(value='Найдём автоматически'); forge_view=tk.StringVar(value='Найдём автоматически')
     java_choices={};forge_choices={}
     selectors=ttk.Frame(frame); selectors.pack(fill='x')
@@ -679,6 +707,7 @@ def gui():
     def pick_game(event=None):
         selected=folder_choices.get(folder_view.get())
         if not selected:return
+        clear_result()
         folder.set(selected)
         detail=folder_details[selected]
         folder_note.set(f"Папка игры: {selected}\n{detail['launcher']} · {detail['name']} · {detail['version']} · модов: {detail['mods']}")
@@ -687,6 +716,7 @@ def gui():
     def choose(var,kind):
         value=filedialog.askdirectory(title='Папка игры с mods. Для официального Launcher обычно .minecraft.') if kind=='folder' else filedialog.askopenfilename(title=('Java 17: bin/java.exe' if kind=='java' else 'versions/версия/версия.json'),filetypes=([('Java','java.exe')] if kind=='java' else [('Метаданные версии','*.json')]))
         if value:
+            clear_result()
             if kind=='folder':
                 folder_scope[0]=value
                 folder.set(value if Path(value).name.lower()!='versions' else '')
@@ -698,6 +728,7 @@ def gui():
     def new_profile():
         parent=filedialog.askdirectory(title='Где создать отдельную сборку? Внутри появится папка Minecraft-AEM.',mustexist=True)
         if not parent:return
+        clear_result()
         try:
             created=create_profile(parent);folder.set(str(created));folder_scope[0]=str(created)
         except Exception as e:messagebox.showerror('Не удалось создать папку',str(e));return
@@ -717,11 +748,11 @@ def gui():
         elif kind=='java':
             java_combo=ttk.Combobox(selectors,textvariable=java_view,state='readonly')
             java_combo.grid(row=row,column=1,sticky='ew')
-            java_combo.bind('<<ComboboxSelected>>',lambda e:java.set(java_choices[java_view.get()]))
+            java_combo.bind('<<ComboboxSelected>>',lambda e:(java.set(java_choices[java_view.get()]),clear_result()))
         else:
             forge_combo=ttk.Combobox(selectors,textvariable=forge_view,state='readonly')
             forge_combo.grid(row=row,column=1,sticky='ew')
-            forge_combo.bind('<<ComboboxSelected>>',lambda e:version.set(forge_choices[forge_view.get()]))
+            forge_combo.bind('<<ComboboxSelected>>',lambda e:(version.set(forge_choices[forge_view.get()]),clear_result()))
         ttk.Button(selectors,text='Другая папка…' if kind=='folder' else 'Указать…',command=lambda v=var,k=kind:choose(v,k)).grid(row=row,column=2,padx=(8,0))
     selectors.columnconfigure(1,weight=1)
     create_button=ttk.Button(selectors,text='Создать отдельную сборку',command=new_profile)
@@ -748,6 +779,10 @@ def gui():
     controls=ttk.Frame(frame); controls.pack(fill='x',pady=(15,0))
     events=queue.Queue(); buttons=[w for w in selectors.winfo_children() if isinstance(w,ttk.Button)];working=[False]
     combos=[launcher_combo,folder_combo,java_combo,forge_combo]
+    def clear_result():
+        last_receipt[0]=''
+        for child in table.get_children():table.delete(child)
+        status.set('Моды в этой папке ещё не проверены. Нажмите «Проверить».')
     def use_game_folders(found,chosen):
         folder_choices.clear();folder_details.clear()
         for i,c in enumerate(found['candidates'],1):
@@ -788,9 +823,10 @@ def gui():
             if preview['conflicts']:messagebox.showerror('Нужна проверка конфликтов','\n'.join(preview['conflicts']));return
             changes='\n'.join(op['path'] for op in preview['ops'][:12]) or 'Файлы набора уже совпадают.'
             if len(preview['ops'])>12:changes+=f"\n… ещё {len(preview['ops'])-12} файлов"
-            explanation=f'Папка игры:\n{selected}\n\nПлан изменений:\n{changes}\n\nПеред записью будут проверены загрузки и создан backup. Посторонние моды и существующие настройки сохраняются. Аккаунты и миры не затрагиваются.\n\nЗакройте игру и лаунчер. Установить?'
+            explanation=f'Папка игры:\n{selected}\n\nМоды будут записаны сюда:\n{Path(selected)/"mods"}\n\nМетаданные Forge подтверждают версию, а не активную папку игры. Сверьте путь выше с папкой, открытой кнопкой «Открыть папку модов» в Minecraft.\n\nПлан изменений:\n{changes}\n\nПеред записью будут проверены загрузки и создан backup. Посторонние моды и существующие настройки сохраняются. Аккаунты и миры не затрагиваются.\n\nЗакройте игру и лаунчер. Установить?'
             if not messagebox.askyesno('Проверка перед установкой',explanation):return
         if kind=='rollback' and not messagebox.askyesno('Откат', 'Вернуть файлы последней операции? Файлы, изменённые после установки, не перезаписываются.'): return
+        clear_result()
         for b in buttons: b.configure(state='disabled')
         for combo in combos:combo.configure(state='disabled')
         working[0]=True
@@ -810,24 +846,35 @@ def gui():
                     chosen_java=found['java'][0]['path'] if found['java'] else ''
                     chosen_version=found['forge'][0]['path'] if found['forge'] else ''
                     if kind in ('detect','runtime'):
-                        events.put(('detected','Готово. Подтвердите найденную сборку и нажмите «Установить / обновить». Перед записью будет показан план.'));return
+                        events.put(('detected','Поиск папок и версий завершён. Моды ещё не проверены. Выберите сборку и нажмите «Проверить».'));return
                     if kind=='apply' and (not chosen_java or not chosen_version):raise SafetyError(runtime_help(found))
-                if kind=='rollback': result='Откат выполнен: '+rollback(selected)
+                runtime='не проверены';operation=''
+                if kind=='rollback': operation='Откат выполнен: '+rollback(selected)
                 elif kind=='apply':
-                    check_runtime(chosen_java,chosen_version)
-                    result=apply(selected,m,lambda s:events.put(('status',s)))
+                    runtime=check_runtime(chosen_java,chosen_version)
+                    operation=apply(selected,m,lambda s:events.put(('status',s)))
                 else:
-                    result='Проверка модов завершена.'
-                    if chosen_java and chosen_version: result=check_runtime(chosen_java,chosen_version)
-                    else: result+=' Java или Forge не найдены: следуйте подсказке над списком.'
+                    if chosen_java and chosen_version:
+                        try:runtime=check_runtime(chosen_java,chosen_version)
+                        except (SafetyError,OSError,subprocess.TimeoutExpired) as error:runtime='НЕ подтверждены: '+str(error)
+                    else:runtime='Java или Forge не найдены: следуйте подсказке над списком.'
                 plan=inspect_profile(selected,m)
-                if plan['conflicts']: result+=' Конфликт: '+'; '.join(plan['conflicts'])
-                elif plan['outsiders']: result+=f" Посторонних JAR сохранено: {len(plan['outsiders'])}. Их совместимость не гарантируется."
-                events.put(('done',(result,plan['rows'])))
+                result=verification_summary(plan,m)
+                if kind=='check':result+=' Проверка ничего не устанавливает.'
+                elif kind=='apply':result+=' Установка завершена.' if not plan['conflicts'] and not plan['ops'] else ' После установки обнаружены изменения: повторите проверку.'
+                elif kind=='rollback':result+=' Откат выполнен.'
+                if plan['conflicts']:result+=' Подробности: «Скопировать результат».'
+                receipt=verification_receipt(plan,m,{'check':'Проверка без записи','apply':'Установка / обновление','rollback':'Откат'}[kind],runtime,operation)
+                events.put(('done',(result,plan,receipt)))
             except Exception as e: events.put(('error',str(e)))
         threading.Thread(target=worker,daemon=True).start()
     for label,kind in [('1. Проверить','check'),('2. Установить / обновить','apply'),('Откатить','rollback')]:
         b=ttk.Button(controls,text=label,command=lambda k=kind:task(k)); b.pack(side='left',padx=(0,10)); buttons.append(b)
+    def copy_result():
+        if not last_receipt[0]:messagebox.showinfo('Результата пока нет','Сначала выберите папку и нажмите «Проверить».');return
+        window.clipboard_clear();window.clipboard_append(last_receipt[0])
+        messagebox.showinfo('Результат скопирован','В буфере путь выбранной папки и результаты проверки всех модов. Можно отправить этот текст для диагностики. Аккаунты и токены в него не входят.')
+    copy_button=ttk.Button(controls,text='Скопировать результат',command=copy_result);copy_button.pack(side='left');buttons.append(copy_button)
     ttk.Label(frame,text='Аккаунты, saves, метки Xaero и общие профили лаунчеров не читаются и не изменяются.',wraplength=840,padding=(0,15,0,0)).pack(anchor='w')
     def poll():
         while not events.empty():
@@ -842,9 +889,10 @@ def gui():
                 if event=='error': status.set('Остановлено: '+data); messagebox.showerror('Операция остановлена',data)
                 elif event=='detected':status.set(data)
                 else:
-                    message,rows=data; status.set(message)
+                    message,plan,receipt=data; status.set(message);last_receipt[0]=receipt
+                    folder_note.set(f"Проверенная папка игры: {plan['root']}\nПапка модов: {plan['root']/'mods'} · JAR сейчас: {plan['jar_count']}")
                     for child in table.get_children(): table.delete(child)
-                    for r in rows: table.insert('', 'end',text=r['name'],values=(r['version'],r['status']))
+                    for r in plan['rows']: table.insert('', 'end',text=r['name'],values=(r['version'],r['status']))
         window.after(100,poll)
     def close():
         if any(str(b['state'])=='disabled' for b in buttons):

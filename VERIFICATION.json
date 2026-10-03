@@ -1,6 +1,6 @@
 {
   "unit_tests": {
-    "passed": 41,
+    "passed": 45,
     "failed": 0
   },
   "official_downloads": [
@@ -153,21 +153,49 @@
       "sha256": "3e604621a6c9356fb2e676d7b8038cb07c8abdd430abdfe1eccc9afae99dcb90",
       "bytes": 10376553,
       "status": "verified"
+    },
+    {
+      "file": "inventoryhud.forge.1.20.1-3.4.26.jar",
+      "sha1": "f0adda10a3d6549e6dfdffd41e72270c61c8a302",
+      "sha256": "01d9a2d1e26fffff78eb47f3e4837189e7567dde849810b1bf6d278520c1e971",
+      "sha512": "69698f4b505d070b097fab6b7bde508f8de138137f5825ed6601601a02b3a8876a4ad2f93f25667a6579367dd20dc3a5ae0465a4957bd5740a12668d6b3ad725",
+      "bytes": 238088,
+      "status": "verified"
+    },
+    {
+      "file": "justzoom_forge_2.1.1_MC_1.20.1.jar",
+      "sha1": "8bbcdfb61e9f0f738af0efff12c93b8f9daf2fb0",
+      "sha256": "778c75c388a8dffed5bfad25ab9a420dfd6c4ec3bdc1699ec6c2bab2336b5040",
+      "sha512": "f74d01e2085f3242029dfc4dc0b49599679e36334c1dc0fcb76e75f229f49705ef0538cc06004ee6e4e909c7ff027be818a4daf5cf9c7437537e6adc754d2879",
+      "bytes": 204574,
+      "status": "verified"
+    },
+    {
+      "file": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
+      "sha1": "2019d821bed9071daabed43979433a5473ceee49",
+      "sha256": "e78686b92c3761ec26eb9d3c53efdd3d6ca77981cbd3723995e1163b7103ae0b",
+      "sha512": "df79a0c64da14ca2b27dc04a72d85ce5c8e7c498e7b72da4d7bfddd592bb4bac165e70afe33fac97446e4996fffd8003350df07ede2a77233dddec77b8ff0ee7",
+      "bytes": 625185,
+      "status": "verified"
     }
   ],
   "full_fixture": {
-    "official_artifacts": 25,
-    "safe_presets": 19,
+    "official_artifacts": 28,
+    "safe_presets": 20,
     "fresh_install": "PASS",
+    "r6_upgrade_downloads_only_3_new_mods": "PASS",
+    "original_23_mods_2_extras_19_presets": "UNCHANGED",
     "idempotent_second_run": "PASS",
     "rollback": "PASS",
+    "existing_HUD_config_and_custom_keys": "UNCHANGED",
     "private_and_unmanaged_sentinels": "UNCHANGED",
     "live_profile_written": false,
-    "NAS_accessed": false
+    "NAS_accessed": false,
+    "in_game_visual_acceptance": "NOT RUN"
   },
   "browser": {
     "checks": [
-      "25 official-source rows rendered",
+      "28 official-source rows rendered",
       "Both launcher selectors and instructions",
       "Both download archives and SHA256 return HTTP 200",
       "Unsupported browser fallback",
@@ -181,7 +209,8 @@
     "matching": 25,
     "conflicts": 0,
     "unresolved": 0,
-    "writes": 0
+    "writes": 0,
+    "release_checked": "r6; no live r7 profile changes or game launch"
   },
   "exe_self_test": "PASS",
   "privacy_audit": "PASS; source, nested ZIP and embedded EXE archives checked",
@@ -200,8 +229,8 @@
       "Whole-archive SHA256 independently verified after both parts pass"
     ],
     "errors": [],
-    "assembled_sha256": "715a8eb29df9bf352685674574dc1818b92cad95f5527246cc0b1e6949fa3137",
-    "modpack_manifest_sha256": "69e13bb9a33809edc53c11f1696bef9b3713e0b4c66f6fec7c507c89b1c2f9b2"
+    "assembled_sha256": "f2811fe903fb4fd4359f4f4a5ed7dbccfdf2c1a6e17e64cd39d0aa353929c6b4",
+    "modpack_manifest_sha256": "c7242af5d845af5a9f9a940501d857a7d1d5f4b94810f2bb81f411dae11ac173"
   },
   "runtime_auto": {
     "folder_candidates": 7,
@@ -211,12 +240,14 @@
     "automatic_forge_selection": "PASS",
     "explicit_folder_selection": "PASS",
     "install_button_visible_at_minimum_window": "PASS",
-    "title_identifies_r6": true,
+    "title_identifies_release": true,
     "install_invoked": false,
     "java_version": "17.0.15",
     "windowed_exe_java17_forge_exit_code": 0,
     "real_java_version": "Microsoft 17.0.15",
-    "java21_excluded": true
+    "java21_excluded": true,
+    "gui_provenance": "runtime chooser verified in r7; r8 GUI independently covered by friend_profile_regression",
+    "exe_provenance": "r8 packaged EXE Java17/Forge self-test"
   },
   "official_default_game_directory": {
     "supported": ".minecraft",
@@ -225,7 +256,7 @@
     "preview_before_apply": true,
     "new_directory_optional": true
   },
-  "release": "r6",
+  "release": "r8",
   "packaged_exe": {
     "--self-test-java17": 0,
     "--self-test-folders": 0,
@@ -240,5 +271,41 @@
     "official_download_sha256_verified": true,
     "failure_log": "domain, Windows code, TLS flags and reason; no full URL or personal paths",
     "friend_network_retested": false
+  },
+  "client_extensions": {
+    "new_mods": [
+      "Inventory HUD+ 3.4.26",
+      "Just Zoom 2.1.1",
+      "Konkrete 1.8.0"
+    ],
+    "sha1_and_sha512_match_official_catalog": true,
+    "java_class_major": 61,
+    "forge_47_4_10_dependency_ranges": "PASS",
+    "required_konkrete_dependency": "SATISFIED",
+    "inventoryhud_no_mixins": true,
+    "zoom_default_Z_hold_and_wheel": "Verified in pinned official source JAR",
+    "existing_configs_and_keys": "Preserved",
+    "embeddium_oculus": "No declared dependency incompatibility; rendering/mixin cooperation not proven by metadata",
+    "in_game_visual_acceptance": "NOT RUN"
+  },
+  "friend_profile_regression": {
+    "profile_versions_Mods_discovered": "PASS",
+    "inner_mods_not_selected_as_game_directory": "PASS",
+    "two_candidates_require_choice": "PASS",
+    "missing_mods_summary_18_of_26": "PASS",
+    "full_receipt_contains_target_AEM_and_Upgrader": "PASS",
+    "stale_results_clear_on_folder_change": "PASS",
+    "install_and_receipt_buttons_visible_at_minimum_size": "PASS",
+    "static_success_header_removed": "PASS",
+    "fixture_jar_count_unchanged": true,
+    "live_profile_written": false,
+    "system_clipboard_used": false
+  },
+  "final_install_verification": {
+    "all_manifest_files_rehashed_before_success": true,
+    "concurrent_removal_after_individual_write": "FAILS SAFELY AND ROLLS BACK",
+    "check_vs_install_distinguished": true,
+    "receipt_includes_explicit_target_and_all_component_statuses": true,
+    "active_game_directory_inferred_from_forge_metadata": false
   }
 }

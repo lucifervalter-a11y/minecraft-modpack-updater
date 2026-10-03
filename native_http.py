@@ -48,7 +48,7 @@ def stream(url, output, maximum):
         data=dword(value)
         checked(dll.WinHttpSetOption(request,number,ctypes.byref(data),ctypes.sizeof(data)),'настройка HTTPS')
     try:
-        session=checked(dll.WinHttpOpen('MinecraftModpackUpdater/r6',4,None,None,0),'открытие HTTPS');handles.append(session)
+        session=checked(dll.WinHttpOpen('MinecraftModpackUpdater/r8',4,None,None,0),'открытие HTTPS');handles.append(session)
         checked(dll.WinHttpSetTimeouts(session,10000,30000,30000,45000),'тайм-ауты')
         connection=checked(dll.WinHttpConnect(session,parsed.hostname,443,0),'подключение');handles.append(connection)
         request=checked(dll.WinHttpOpenRequest(connection,'GET',parsed.path,None,None,None,0x00800000),'HTTPS-запрос');handles.append(request)

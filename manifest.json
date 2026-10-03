@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "release": "client-aem-2026-10-03.1",
+  "release": "client-aem-2026-10-03.2-r7",
   "minecraft": "1.20.1",
   "forge": "47.4.10",
   "java": 17,
@@ -417,6 +417,60 @@
       ],
       "category": "mods",
       "providers": []
+    },
+    {
+      "name": "Inventory HUD+",
+      "file": "inventoryhud.forge.1.20.1-3.4.26.jar",
+      "bytes": 238088,
+      "sha256": "01d9a2d1e26fffff78eb47f3e4837189e7567dde849810b1bf6d278520c1e971",
+      "sha512": "69698f4b505d070b097fab6b7bde508f8de138137f5825ed6601601a02b3a8876a4ad2f93f25667a6579367dd20dc3a5ae0465a4957bd5740a12668d6b3ad725",
+      "download_url": "https://cdn.modrinth.com/data/Kp2uclYl/versions/xnDlNpNS/inventoryhud.forge.1.20.1-3.4.26.jar",
+      "project_id": "Kp2uclYl",
+      "version_id": "xnDlNpNS",
+      "version": "3.4.26",
+      "official_page": "https://modrinth.com/mod/inventoryhudplus/version/xnDlNpNS",
+      "license": "LicenseRef-All-Rights-Reserved",
+      "mod_ids": [
+        "inventoryhud"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Just Zoom",
+      "file": "justzoom_forge_2.1.1_MC_1.20.1.jar",
+      "bytes": 204574,
+      "sha256": "778c75c388a8dffed5bfad25ab9a420dfd6c4ec3bdc1699ec6c2bab2336b5040",
+      "sha512": "f74d01e2085f3242029dfc4dc0b49599679e36334c1dc0fcb76e75f229f49705ef0538cc06004ee6e4e909c7ff027be818a4daf5cf9c7437537e6adc754d2879",
+      "download_url": "https://cdn.modrinth.com/data/iAiqcykM/versions/HrSzoCLd/justzoom_forge_2.1.1_MC_1.20.1.jar",
+      "project_id": "iAiqcykM",
+      "version_id": "HrSzoCLd",
+      "version": "2.1.1",
+      "official_page": "https://modrinth.com/mod/just-zoom/version/HrSzoCLd",
+      "license": "LicenseRef-DSMSLv3.1",
+      "mod_ids": [
+        "justzoom"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Konkrete",
+      "file": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
+      "bytes": 625185,
+      "sha256": "e78686b92c3761ec26eb9d3c53efdd3d6ca77981cbd3723995e1163b7103ae0b",
+      "sha512": "df79a0c64da14ca2b27dc04a72d85ce5c8e7c498e7b72da4d7bfddd592bb4bac165e70afe33fac97446e4996fffd8003350df07ede2a77233dddec77b8ff0ee7",
+      "download_url": "https://cdn.modrinth.com/data/J81TRJWm/versions/skYziQQL/konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
+      "project_id": "J81TRJWm",
+      "version_id": "skYziQQL",
+      "version": "1.8.0",
+      "official_page": "https://modrinth.com/mod/konkrete/version/skYziQQL",
+      "license": "Apache-2.0",
+      "mod_ids": [
+        "konkrete"
+      ],
+      "category": "mods",
+      "providers": []
     }
   ],
   "configs": [
@@ -514,6 +568,11 @@
       "path": "options.txt",
       "bundle": "options.txt",
       "sha256": "317e76abeb53374c893350b1c4bf36fa28ea8065575856bb00dfc4cbf56685dd"
+    },
+    {
+      "path": "config/inventoryhud-client.toml",
+      "bundle": "inventoryhud-client.toml",
+      "sha256": "06c6450b606cda5a66f1d7cfc6d7d9542613d27cab31cd8c2bc16db9e5c703b8"
     }
   ],
   "extras": [

@@ -304,4 +304,37 @@ class UpdaterTests(unittest.TestCase):
         with patch.object(native_http,'stream',corrupt):
             with self.assertRaisesRegex(u.SafetyError,'SHA256'):u.download(self.m['mods'][0],self.base/'bad.jar')
 
+    def test_profile_named_mods_is_distinct_from_inner_jar_directory(self):
+        game=self.base/'.minecraft/versions/Mods';(game/'mods').mkdir(parents=True)
+        (game/'Mods.json').write_text(json.dumps({'id':'Mods','libraries':[{'name':'net.minecraftforge:forge:1.20.1-47.4.10'}]}))
+        self.assertEqual(u.profile_path(game),game)
+        with self.assertRaises(u.SafetyError):u.profile_path(game/'mods')
+        (game/'mods/sample.jar').write_bytes(self.payload)
+        self.assertEqual(u.inspect_profile(game,self.m)['rows'][0]['status'],'OK')
+
+    def test_discovery_lists_profile_named_mods_separately_from_launcher_root(self):
+        app=self.base/'AppData';game=app/'.minecraft/versions/Mods';(game/'mods').mkdir(parents=True)
+        (game/'Mods.json').write_text(json.dumps({'id':'Mods','libraries':[{'name':'net.minecraftforge:forge:1.20.1-47.4.10'}]}))
+        with patch.dict(os.environ,{'APPDATA':str(app)}):found=u.discover_game_folders()
+        self.assertEqual({c['path'] for c in found['candidates']},{str(app/'.minecraft'),str(game)})
+        self.assertEqual(u.choose_game_folder(found['candidates']),'')
+
+    def test_missing_mod_summary_and_receipt_do_not_claim_success(self):
+        plan=u.inspect_profile(self.root,self.m)
+        text=u.verification_receipt(plan,self.m,'Проверка без записи','Java 17 / Forge OK')
+        self.assertIn('Сборка НЕ готова: моды 0/1',text)
+        self.assertIn('[Скачать] Sample 1',text)
+        self.assertIn(str(self.root/'mods'),text)
+        self.assertEqual(list(self.root.iterdir()),[])
+
+    def test_final_check_catches_removal_after_individual_write_verification(self):
+        real=u.atomic_write;victim=self.root/'mods/sample-1.jar'
+        def remove_after_later_write(dest,data):
+            real(dest,data)
+            if dest==self.root/u.STATE and victim.exists():victim.unlink()
+        with patch.object(u,'atomic_write',remove_after_later_write):
+            with self.assertRaisesRegex(u.SafetyError,'Итоговая проверка не пройдена'):self.install()
+        self.assertFalse(victim.exists());self.assertFalse((self.root/u.STATE).exists())
+        self.assertEqual(u.backup_list(self.root),[])
+
 if __name__=='__main__':unittest.main(verbosity=2)
