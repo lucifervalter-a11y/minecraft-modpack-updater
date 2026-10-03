@@ -1,0 +1,202 @@
+{
+  "schema": 1,
+  "root": "minecraft-modpack-updater",
+  "files": [
+    {
+      "path": "updater.py",
+      "bytes": 29395,
+      "sha256": "37c52f6f6a2fd6dee524117a6ad2df520973231e8b359cd2d851f830e8acc54b"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 23128,
+      "sha256": "69e13bb9a33809edc53c11f1696bef9b3713e0b4c66f6fec7c507c89b1c2f9b2"
+    },
+    {
+      "path": "Start.cmd",
+      "bytes": 140,
+      "sha256": "9e6ba67fdbe52301e580e983e3fe4b0cdd73b10b53aef0c7cd612ab4f3ccfd64"
+    },
+    {
+      "path": "README.md",
+      "bytes": 10801,
+      "sha256": "53fcecc4bfd2792006ecccfb8868a523297029e38f44dc76f1462eacddaad58a"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1095,
+      "sha256": "508b650cbc6b53643d8584ff86c7714cbca09833d2b5d10df98502c4a08f7eff"
+    },
+    {
+      "path": "test_updater.py",
+      "bytes": 10000,
+      "sha256": "5da8d8712660e9c594935f2723c356d7fe79c4fbf391f54582aaaa32b0211edc"
+    },
+    {
+      "path": "build_release.py",
+      "bytes": 1484,
+      "sha256": "7d4f896bc0a4f556a9b51806a760cf6566f23d579e60e0b30a7359d54a43e9a6"
+    },
+    {
+      "path": "requirements-build.txt",
+      "bytes": 20,
+      "sha256": "4439c693c19271e4b0bdc56c641c36b3b06010b1b22eae6733cd244d752e85d5"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 79,
+      "sha256": "f2e2bb62a341767e28fad6d016d13a009641eb32e1611f08bcffcc8eb97403a4"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 6314,
+      "sha256": "f7f1f88e7d83dc7d50e964fd4ae8610bde2e214afab1a65080a10bfc3ee44375"
+    },
+    {
+      "path": "presets/appleskin-client.toml",
+      "bytes": 1337,
+      "sha256": "28c6ad7570268b02ec6f73fb7c39c49ecf90f0697d0db9447899e8aa96285200"
+    },
+    {
+      "path": "presets/create-client.toml",
+      "bytes": 4264,
+      "sha256": "5b9ee8bee23d0f12b926567309802eed6f1f46a195726b2b034d692deb833b65"
+    },
+    {
+      "path": "presets/create-common.toml",
+      "bytes": 148,
+      "sha256": "6c0f6254798808bce8079a1cfafe4d6c082cead42c51d1e3121f3580f8a44eca"
+    },
+    {
+      "path": "presets/create_connected-common.toml",
+      "bytes": 1688,
+      "sha256": "e6dcce46f6da0f696ef1df87860c8619c72d95397f167cd7f7b8d8772b20cc21"
+    },
+    {
+      "path": "presets/createaddition-common.toml",
+      "bytes": 4296,
+      "sha256": "1d28b40d466308be422d511bcd662b26807a9616144055591ccabb53b42fad92"
+    },
+    {
+      "path": "presets/do_a_barrel_roll-client.json",
+      "bytes": 1695,
+      "sha256": "65113ba53fca553668bb54342a244cf83cab70bce8240900c62a77c7e9e36e83"
+    },
+    {
+      "path": "presets/embeddium-mixins.properties",
+      "bytes": 269,
+      "sha256": "09ff183e061d93b79514bc171bf9118497578757e7a5c45946039487656e2619"
+    },
+    {
+      "path": "presets/embeddium-options.json",
+      "bytes": 851,
+      "sha256": "b78e1a745d5080dc2e50dd192982aeb59f32b1645626b77ac38a2b725ea52122"
+    },
+    {
+      "path": "presets/farmersdelight-client.toml",
+      "bytes": 471,
+      "sha256": "e4a752b4f86b93e50eeeaf91e045a67be910b0a70c0b582927099bb93c0b3132"
+    },
+    {
+      "path": "presets/farmersdelight-common.toml",
+      "bytes": 3863,
+      "sha256": "a05079b5dbd8e2b989a348eb3fb341da5b98a23e1a9f22c86cba866bd646267e"
+    },
+    {
+      "path": "presets/flywheel-client.toml",
+      "bytes": 609,
+      "sha256": "9dbbbbf8a27341be108f0fa8b557caa1d18a7c7bdc6584ba623bb8358cbfd407"
+    },
+    {
+      "path": "presets/forge-client.toml",
+      "bytes": 1602,
+      "sha256": "a8448518860cd8b542dadf75521bfab981451775212ee1b51ddc646d998f9311"
+    },
+    {
+      "path": "presets/MouseTweaks.cfg",
+      "bytes": 135,
+      "sha256": "4069ce1a439d8c37453c1b1e9f2037e0942674c7e48723a39b37eab245792ad4"
+    },
+    {
+      "path": "presets/oculus.properties",
+      "bytes": 141,
+      "sha256": "95f38e874e2caca88fd953dc1cecd60ada7cd45e60f7e30bcafc4a1e37694d6f"
+    },
+    {
+      "path": "presets/options.txt",
+      "bytes": 269,
+      "sha256": "317e76abeb53374c893350b1c4bf36fa28ea8065575856bb00dfc4cbf56685dd"
+    },
+    {
+      "path": "presets/ponder-client.toml",
+      "bytes": 599,
+      "sha256": "7508f3f5ceed80c7c606d01ee2dc93e2c72a8afa199ccb691fc5225c894d5bbd"
+    },
+    {
+      "path": "presets/sliceanddice-client.toml",
+      "bytes": 29,
+      "sha256": "62cd1ca516e409a29de0a66158e4bfdcec1cb87841d5eda04df7bf54aa3f218e"
+    },
+    {
+      "path": "presets/sliceanddice-common.toml",
+      "bytes": 404,
+      "sha256": "61656b3d54da0fa7a4d2c297a8e0dcbc701996c4cf1187c063208ab3e46ff693"
+    },
+    {
+      "path": "presets/upgrader-common.toml",
+      "bytes": 1307,
+      "sha256": "3459ec25e28085ecb672a3e5e4197d740e77e0c7f2084fa71bec19abd7344496"
+    },
+    {
+      "path": "docs/.nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/app.js",
+      "bytes": 4338,
+      "sha256": "bad5174ccac2d88544fc596e1f0ff5a78562d3849cdef851ce89b35b2fe4a451"
+    },
+    {
+      "path": "docs/downloads/Minecraft-Modpack-Updater-Source.zip",
+      "bytes": 39019,
+      "sha256": "a68ae0e01418fc888b2cf4ab994c4ff45ca644815d67eb82ea3d40c74a6e0803"
+    },
+    {
+      "path": "docs/downloads/Minecraft-Modpack-Updater-Windows.zip",
+      "bytes": 12624738,
+      "sha256": "81c93e8e888db89f0b5195edd545e246673312fa0e7ce854623a3e5562ae983a"
+    },
+    {
+      "path": "docs/downloads/SHA256SUMS.txt",
+      "bytes": 209,
+      "sha256": "41f6ae922cc07127b80c720bb606eb47799f269f5f92161de7831da153b8acd9"
+    },
+    {
+      "path": "docs/index.html",
+      "bytes": 9240,
+      "sha256": "ef91764516f52ed34e45fdf8c2383b6302ff48cc64489abbb4bc054be80c6f36"
+    },
+    {
+      "path": "docs/manifest.json",
+      "bytes": 23128,
+      "sha256": "69e13bb9a33809edc53c11f1696bef9b3713e0b4c66f6fec7c507c89b1c2f9b2"
+    },
+    {
+      "path": "docs/style.css",
+      "bytes": 6676,
+      "sha256": "5ee7b849bd8484be81c0a6112a3e5ff38bec142a403acf5c10232cdc5fbe38e1"
+    }
+  ],
+  "excluded": [
+    "build cache",
+    "local profile paths",
+    "JAR binaries",
+    "worlds",
+    "accounts",
+    "tokens",
+    "Xaero waypoints",
+    "raw local inventory",
+    "download cache"
+  ]
+}

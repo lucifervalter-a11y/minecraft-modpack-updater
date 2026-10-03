@@ -1,0 +1,193 @@
+{
+  "unit_tests": {
+    "passed": 24,
+    "failed": 0
+  },
+  "official_downloads": [
+    {
+      "file": "AdditionalEnchantedMiner-1.20.1-1201.1.136.jar",
+      "sha256": "2ea292c8597f14aa1c205b4c14e7efce78f1b58e2302c6b9e1c3f235a53b11f0",
+      "bytes": 1051803,
+      "status": "verified"
+    },
+    {
+      "file": "appleskin-forge-mc1.20.1-2.5.1.jar",
+      "sha256": "e12419e43e3babc810af289403c5cd96bd7f09809b389acc6bb2f122b4b2a426",
+      "bytes": 47428,
+      "status": "verified"
+    },
+    {
+      "file": "Controlling-forge-1.20.1-12.0.2.jar",
+      "sha256": "cff8c3426a77f9e7412262b6d79e423979eff3831e010b3b1ea9677e1ecd74cd",
+      "bytes": 115280,
+      "status": "verified"
+    },
+    {
+      "file": "create-1.20.1-6.0.8.jar",
+      "sha256": "6fbb910c367dbce8e4fc7e5bf64b6edd4de980906ed00af8e47e4af843c0d9b0",
+      "bytes": 19170905,
+      "status": "verified"
+    },
+    {
+      "file": "create_connected-1.2.3-mc1.20.1-all.jar",
+      "sha256": "5f584f118f2bda3dfeed8b8fc9198ea143c6988e2f6f04eb63f42c0da8b50e63",
+      "bytes": 6791072,
+      "status": "verified"
+    },
+    {
+      "file": "createaddition-1.20.1-1.3.3.jar",
+      "sha256": "9bf3ae15d86ec95d128542caf10e4b5498e49ca02f725b9302d6daecd5eae1db",
+      "bytes": 1577313,
+      "status": "verified"
+    },
+    {
+      "file": "do_a_barrel_roll-forge-3.5.61.20.1.jar",
+      "sha256": "71ffc54d3f1fbe9497cf7b398c79a2724c60f7b06809941e9ded0888587347af",
+      "bytes": 625488,
+      "status": "verified"
+    },
+    {
+      "file": "embeddium-0.3.31_mc1.20.1.jar",
+      "sha256": "eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb",
+      "bytes": 1320675,
+      "status": "verified"
+    },
+    {
+      "file": "FarmersDelight-1.20.1-1.3.4.jar",
+      "sha256": "34f03eb671ea1ca579b00c98e4541404cb96d1a292014aed9cc5eb45ad8afbce",
+      "bytes": 3311051,
+      "status": "verified"
+    },
+    {
+      "file": "InventoryProfilesNext-forge-1.20-1.10.20.jar",
+      "sha256": "2f664f23ed031f6cfacce01b0461c450e2248435936cb6b7e2e0463c6ec56343",
+      "bytes": 1457354,
+      "status": "verified"
+    },
+    {
+      "file": "Jade-1.20.1-Forge-11.13.3.jar",
+      "sha256": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
+      "bytes": 553487,
+      "status": "verified"
+    },
+    {
+      "file": "jei-1.20.1-forge-15.56.0.205.jar",
+      "sha256": "6b251e60a4719c874da89d750af97aa6498f6f4475e3ae79cb1288c7bf0cb65c",
+      "bytes": 1778129,
+      "status": "verified"
+    },
+    {
+      "file": "kotlinforforge-4.12.0-all.jar",
+      "sha256": "6a66c6a68ec09f8717cdbf06883394f0ee24d7cd826b7134a0f81839e8e720ae",
+      "bytes": 7442998,
+      "status": "verified"
+    },
+    {
+      "file": "libIPN-forge-1.20-4.0.2.jar",
+      "sha256": "cb96fa15eddc74c243677f7f5b6e3ecaa87bb33f4854ae0353646f304058add6",
+      "bytes": 693301,
+      "status": "verified"
+    },
+    {
+      "file": "MouseTweaks-forge-mc1.20.1-2.25.1.jar",
+      "sha256": "6c27d16aa715ac6613a55fc463739e2c7b78279e4e4c4cede299e4a2d4a70f08",
+      "bytes": 76237,
+      "status": "verified"
+    },
+    {
+      "file": "oculus-mc1.20.1-1.8.0.jar",
+      "sha256": "0945df0cba0f62b3901dd80c3268e5311b770ece78c78037a45db12ac0425fef",
+      "bytes": 2851119,
+      "status": "verified"
+    },
+    {
+      "file": "ScalableCatsForce-3.3.1-build-0-with-library.jar",
+      "sha256": "4ae39dc3029d8bc4292d55ff20368b7eb69b050af24ebaa487594ab61665da81",
+      "bytes": 15852918,
+      "status": "verified"
+    },
+    {
+      "file": "Searchables-forge-1.20.1-1.0.3.jar",
+      "sha256": "461add180eb595004d3c9f5ac0ce337752e403077f96b38304800eadf01fb825",
+      "bytes": 77732,
+      "status": "verified"
+    },
+    {
+      "file": "ServerTabInfo-1.20-1.3.8.jar",
+      "sha256": "d25428542f15a1437613553902513b8a11d09e02266c223f15a70b5e8f778ae7",
+      "bytes": 103637,
+      "status": "verified"
+    },
+    {
+      "file": "sliceanddice-forge-3.6.0.jar",
+      "sha256": "bafdcbeda044603b59eb16059829a6698c1a58d1ce865b8658e598f2718d315a",
+      "bytes": 588268,
+      "status": "verified"
+    },
+    {
+      "file": "upgrader-forge-1.2.1-1.20.1.jar",
+      "sha256": "b145adbf1f47e9d63746eb0f47c503e23acf6a4e627d306b2209c3a657e67a75",
+      "bytes": 279141,
+      "status": "verified"
+    },
+    {
+      "file": "xaerominimap-forge-1.20.1-26.5.0.jar",
+      "sha256": "b21e1b4a13de533d0cf57d55969d5c83b3da78e8be44b93e76cddea9f6503d19",
+      "bytes": 2195399,
+      "status": "verified"
+    },
+    {
+      "file": "xaeroworldmap-forge-1.20.1-1.46.0.jar",
+      "sha256": "e00bd87a949cfa8c31d571f4d9646db038e3b98f8cdbb7bd217f3fb9c3780c9e",
+      "bytes": 1425022,
+      "status": "verified"
+    },
+    {
+      "file": "BSL_v10.1.5.zip",
+      "sha256": "1038c018934c43018f9517e326c0cafcf8a3fb83db0d2cce0697fa8ee1289838",
+      "bytes": 1133936,
+      "status": "verified"
+    },
+    {
+      "file": "MPLOCmods_v40.1.zip",
+      "sha256": "3e604621a6c9356fb2e676d7b8038cb07c8abdd430abdfe1eccc9afae99dcb90",
+      "bytes": 10376553,
+      "status": "verified"
+    }
+  ],
+  "full_fixture": {
+    "official_artifacts": 25,
+    "safe_presets": 19,
+    "fresh_install": "PASS",
+    "idempotent_second_run": "PASS",
+    "rollback": "PASS",
+    "private_and_unmanaged_sentinels": "UNCHANGED",
+    "live_profile_written": false,
+    "NAS_accessed": false
+  },
+  "browser": {
+    "checks": [
+      "25 official-source rows rendered",
+      "Both launcher selectors and instructions",
+      "Both download archives and SHA256 return HTTP 200",
+      "Unsupported browser fallback",
+      "Cancel produces no changes",
+      "Explicit folder check hashes JAR correctly without writes",
+      "390px mobile layout has no horizontal overflow"
+    ],
+    "errors": []
+  },
+  "live_inventory_read_only": {
+    "matching": 25,
+    "conflicts": 0,
+    "unresolved": 0,
+    "writes": 0
+  },
+  "exe_self_test": "PASS",
+  "privacy_audit": "PASS; source, nested ZIP and embedded EXE archives checked",
+  "publication": {
+    "repository": "https://github.com/lucifervalter-a11y/minecraft-modpack-updater",
+    "owner": "parent agent",
+    "pages_live_url_verified": false
+  }
+}

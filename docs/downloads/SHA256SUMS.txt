@@ -1,0 +1,2 @@
+a68ae0e01418fc888b2cf4ab994c4ff45ca644815d67eb82ea3d40c74a6e0803  Minecraft-Modpack-Updater-Source.zip
+81c93e8e888db89f0b5195edd545e246673312fa0e7ce854623a3e5562ae983a  Minecraft-Modpack-Updater-Windows.zip

@@ -1,0 +1,31 @@
+#Multiplier applied to the raw value ratio. 1.0 = fair odds, 0.9 = 10% house edge.
+#Range: 0.01 ~ 1.0
+houseEdge = 0.9
+#Lowest possible success chance (0.001 = 0.1%).
+#Range: 0.0 ~ 1.0
+minChance = 0.001
+#Highest possible success chance. Keeps 'downgrades' from being a free win.
+#Range: 0.01 ~ 1.0
+maxChance = 0.9
+#How long the wheel spins before the result is applied, in ticks (20 = 1 second).
+#Range: 20 ~ 600
+spinDurationTicks = 70
+#Hard-coded item values, format 'modid:item=value'. These win over the built-in table.
+valueOverrides = []
+#Multiplies every item's price, valueOverrides included. 1.0 leaves them alone, 2.0 doubles every number the mod shows or rolls against.
+#Range: 0.01 ~ 1000.0
+globalValueMultiplier = 1.0
+#Per-item multipliers on top of globalValueMultiplier, format 'modid:item=factor'. 2.0 makes that one item's price twice what the rest of the config would give it.
+valueMultipliers = []
+#Items that can never be used as an input or picked as a target.
+blacklist = []
+#Most target items one upgrade may ask for. The item's own stack size still applies.
+#Range: 1 ~ 64
+maxTargetCount = 64
+#Attempts a player gets per window. 0 removes the limit.
+#Range: 0 ~ 10000
+attemptLimit = 0
+#Length of that window in seconds. 0 removes the limit.
+#Range: 0 ~ 86400
+attemptWindowSeconds = 0
+

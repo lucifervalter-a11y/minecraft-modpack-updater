@@ -1,0 +1,549 @@
+{
+  "schema": 1,
+  "release": "client-aem-2026-10-03.1",
+  "minecraft": "1.20.1",
+  "forge": "47.4.10",
+  "java": 17,
+  "mods": [
+    {
+      "name": "Additional Enchanted Miner",
+      "version": "1201.1.136",
+      "file": "AdditionalEnchantedMiner-1.20.1-1201.1.136.jar",
+      "bytes": 1051803,
+      "sha256": "2ea292c8597f14aa1c205b4c14e7efce78f1b58e2302c6b9e1c3f235a53b11f0",
+      "sha512": "963810b33aeaa866716de5e1ca852b61e87aff6445d8be695f63d66b750021094f0cea2e36f9b8e5c3c6b190bc51443bc7f5aac21846e3153425d0937158316a",
+      "download_url": "https://cdn.modrinth.com/data/jhxX1zVW/versions/cQSJraHw/AdditionalEnchantedMiner-1.20.1-1201.1.136.jar",
+      "official_page": "https://modrinth.com/mod/additional-enchanted-miner/version/cQSJraHw",
+      "project_id": "jhxX1zVW",
+      "version_id": "cQSJraHw",
+      "license": "LGPL-3.0-only",
+      "mod_ids": [
+        "quarryplus"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "AppleSkin",
+      "version": "2.5.1+mc1.20.1",
+      "file": "appleskin-forge-mc1.20.1-2.5.1.jar",
+      "bytes": 47428,
+      "sha256": "e12419e43e3babc810af289403c5cd96bd7f09809b389acc6bb2f122b4b2a426",
+      "sha512": "3176f928fb6c60d27f5edb610ca4ab0236175404eebf32797a1ec6cdd794bb294a260231579578536d03571377e43c6181adc75d8dd2c0733f17fce4f7e636b9",
+      "download_url": "https://cdn.modrinth.com/data/EsAfCjCV/versions/XdXDExVF/appleskin-forge-mc1.20.1-2.5.1.jar",
+      "official_page": "https://modrinth.com/mod/appleskin/version/XdXDExVF",
+      "project_id": "EsAfCjCV",
+      "version_id": "XdXDExVF",
+      "license": "Unlicense",
+      "mod_ids": [
+        "appleskin"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Controlling",
+      "version": "12.0.2",
+      "file": "Controlling-forge-1.20.1-12.0.2.jar",
+      "bytes": 115280,
+      "sha256": "cff8c3426a77f9e7412262b6d79e423979eff3831e010b3b1ea9677e1ecd74cd",
+      "sha512": "3945bf3f6d843957f13584dfc70bede253d1e48f0dcb96f647fbcc6fcd3d1748a0dd9c6ca5c882e07a41f98eb84057934f51e43ab6023ed0a19695de2e6fe9f5",
+      "download_url": "https://cdn.modrinth.com/data/xv94TkTM/versions/LH6Bi6Am/Controlling-forge-1.20.1-12.0.2.jar",
+      "official_page": "https://modrinth.com/mod/controlling/version/LH6Bi6Am",
+      "project_id": "xv94TkTM",
+      "version_id": "LH6Bi6Am",
+      "license": "MIT",
+      "mod_ids": [
+        "controlling"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Create",
+      "version": "mc1.20.1-6.0.8",
+      "file": "create-1.20.1-6.0.8.jar",
+      "bytes": 19170905,
+      "sha256": "6fbb910c367dbce8e4fc7e5bf64b6edd4de980906ed00af8e47e4af843c0d9b0",
+      "sha512": "5b51f5d31437d9bfbf221b67459abd87260d284874e1e23b7ed1d522b23a48059a3b1d2c1c541428da35dc6be15561b4f3c7f36aac6df3a0e8db6a278f6b0316",
+      "download_url": "https://cdn.modrinth.com/data/LNytGWDc/versions/8amzvn9x/create-1.20.1-6.0.8.jar",
+      "official_page": "https://modrinth.com/mod/create/version/8amzvn9x",
+      "project_id": "LNytGWDc",
+      "version_id": "8amzvn9x",
+      "license": "LicenseRef-Create-Mod-License",
+      "mod_ids": [
+        "create"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Create: Connected",
+      "version": "1.2.3-mc1.20.1",
+      "file": "create_connected-1.2.3-mc1.20.1-all.jar",
+      "bytes": 6791072,
+      "sha256": "5f584f118f2bda3dfeed8b8fc9198ea143c6988e2f6f04eb63f42c0da8b50e63",
+      "sha512": "eed01b0d7c96b023bf838208819f52d57606089ce6c1f0e824b212bb53b4e00e35d7d3c7066f125e541799b64c0766b526045ced59bb0dbdce9a7075ab3bdfce",
+      "download_url": "https://cdn.modrinth.com/data/Vg5TIO6d/versions/6gnvaVkN/create_connected-1.2.3-mc1.20.1-all.jar",
+      "official_page": "https://modrinth.com/mod/create-connected/version/6gnvaVkN",
+      "project_id": "Vg5TIO6d",
+      "version_id": "6gnvaVkN",
+      "license": "AGPL-3.0-or-later",
+      "mod_ids": [
+        "create_connected"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Create Crafts & Additions",
+      "version": "forge-1.20.1-1.3.3",
+      "file": "createaddition-1.20.1-1.3.3.jar",
+      "bytes": 1577313,
+      "sha256": "9bf3ae15d86ec95d128542caf10e4b5498e49ca02f725b9302d6daecd5eae1db",
+      "sha512": "a34f5c3b0226069d2882a3e23ba0e364a78bc5d26983b0cecea8d998718f454d3238ab7c5b4b3ef1749b6f2b26a4e427839c7c32468558fa7a8edb0edc727d10",
+      "download_url": "https://cdn.modrinth.com/data/kU1G12Nn/versions/9LgyB6Yb/createaddition-1.20.1-1.3.3.jar",
+      "official_page": "https://modrinth.com/mod/createaddition/version/9LgyB6Yb",
+      "project_id": "kU1G12Nn",
+      "version_id": "9LgyB6Yb",
+      "license": "MIT",
+      "mod_ids": [
+        "createaddition"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Do a Barrel Roll",
+      "version": "3.5.6+1.20.1-forge",
+      "file": "do_a_barrel_roll-forge-3.5.61.20.1.jar",
+      "bytes": 625488,
+      "sha256": "71ffc54d3f1fbe9497cf7b398c79a2724c60f7b06809941e9ded0888587347af",
+      "sha512": "f07294a0e43826c400d10fe52b6d3a5f58ba9c51eecd464f30957faae875d397a8fbfdd8b6e58989fc7ebfbb59f84b283eb7a83bebc906777d1a2b65336deec4",
+      "download_url": "https://cdn.modrinth.com/data/6FtRfnLg/versions/VH8QpKA5/do_a_barrel_roll-forge-3.5.6%2B1.20.1.jar",
+      "official_page": "https://modrinth.com/mod/do-a-barrel-roll/version/VH8QpKA5",
+      "project_id": "6FtRfnLg",
+      "version_id": "VH8QpKA5",
+      "license": "GPL-3.0-only",
+      "mod_ids": [
+        "do_a_barrel_roll"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Embeddium",
+      "version": "0.3.31+mc1.20.1",
+      "file": "embeddium-0.3.31_mc1.20.1.jar",
+      "bytes": 1320675,
+      "sha256": "eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb",
+      "sha512": "ffbf2da4685260a4d5c14c621708bd20722563f084f042d3dfb0a7b87f048e39299648c854a93939129da0d23a15a91ec628560d601e76074b08e275f6e132e9",
+      "download_url": "https://cdn.modrinth.com/data/sk9rgfiA/versions/UTbfe5d1/embeddium-0.3.31%2Bmc1.20.1.jar",
+      "official_page": "https://modrinth.com/mod/embeddium/version/UTbfe5d1",
+      "project_id": "sk9rgfiA",
+      "version_id": "UTbfe5d1",
+      "license": "LGPL-3.0-only",
+      "mod_ids": [
+        "embeddium",
+        "rubidium"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Farmer's Delight",
+      "version": "1.20.1-1.3.4",
+      "file": "FarmersDelight-1.20.1-1.3.4.jar",
+      "bytes": 3311051,
+      "sha256": "34f03eb671ea1ca579b00c98e4541404cb96d1a292014aed9cc5eb45ad8afbce",
+      "sha512": "932ae0ab95fa0755bb5a79fbf1d1e31d0e86f3c0f5186796ed06973a3019a618ee8c66a4eae5b901909aed6232abb2bd3b1ff0e1905f74fc70644fada94a80b5",
+      "download_url": "https://cdn.modrinth.com/data/R2OftAxM/versions/SiIpcZzM/FarmersDelight-1.20.1-1.3.4.jar",
+      "official_page": "https://modrinth.com/mod/farmers-delight/version/SiIpcZzM",
+      "project_id": "R2OftAxM",
+      "version_id": "SiIpcZzM",
+      "license": "MIT",
+      "mod_ids": [
+        "farmersdelight"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Inventory Profiles Next",
+      "version": "forge-1.20.1-1.10.20",
+      "file": "InventoryProfilesNext-forge-1.20-1.10.20.jar",
+      "bytes": 1457354,
+      "sha256": "2f664f23ed031f6cfacce01b0461c450e2248435936cb6b7e2e0463c6ec56343",
+      "sha512": "8d2ecb06d6cebe56b1e55c1cf535bd4aefd8c1bd7642741435ea0c07a1073e275c40c6b2bfd9c3f2d8fd73b711422e4e2b5e39f84ae756028517715633ed5658",
+      "download_url": "https://cdn.modrinth.com/data/O7RBXm3n/versions/CrtAI3P9/InventoryProfilesNext-forge-1.20-1.10.20.jar",
+      "official_page": "https://modrinth.com/mod/inventory-profiles-next/version/CrtAI3P9",
+      "project_id": "O7RBXm3n",
+      "version_id": "CrtAI3P9",
+      "license": "AGPL-3.0-or-later",
+      "mod_ids": [
+        "inventoryprofilesnext"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Jade",
+      "version": "11.13.3+forge",
+      "file": "Jade-1.20.1-Forge-11.13.3.jar",
+      "bytes": 553487,
+      "sha256": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
+      "sha512": "72025c4ad6d26522bafe3d5d6ac9d4702c006a868312cb34df8a7a2398a4618205839607b129c167fd176e58cb7655f08e3afbf1993925c80d4fcc559c45a037",
+      "download_url": "https://cdn.modrinth.com/data/nvQzSEkH/versions/xJQHCmWJ/Jade-1.20.1-Forge-11.13.3.jar",
+      "official_page": "https://modrinth.com/mod/jade/version/xJQHCmWJ",
+      "project_id": "nvQzSEkH",
+      "version_id": "xJQHCmWJ",
+      "license": "CC-BY-NC-SA-4.0",
+      "mod_ids": [
+        "jade"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Just Enough Items (JEI)",
+      "version": "15.56.0.205",
+      "file": "jei-1.20.1-forge-15.56.0.205.jar",
+      "bytes": 1778129,
+      "sha256": "6b251e60a4719c874da89d750af97aa6498f6f4475e3ae79cb1288c7bf0cb65c",
+      "sha512": "1306fe15c81d54aa9ff8f3d9f04812c0d61ffaaae433c29621f926db8f8e2c898669ccdd99e025849859d38b7a2eac170c466390b467f4dfa77542b5dbdd1678",
+      "download_url": "https://cdn.modrinth.com/data/u6dRKJwZ/versions/9jqubC9n/jei-1.20.1-forge-15.56.0.205.jar",
+      "official_page": "https://modrinth.com/mod/jei/version/9jqubC9n",
+      "project_id": "u6dRKJwZ",
+      "version_id": "9jqubC9n",
+      "license": "MIT",
+      "mod_ids": [
+        "jei"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Kotlin for Forge",
+      "version": "4.12.0",
+      "file": "kotlinforforge-4.12.0-all.jar",
+      "bytes": 7442998,
+      "sha256": "6a66c6a68ec09f8717cdbf06883394f0ee24d7cd826b7134a0f81839e8e720ae",
+      "sha512": "767f40030ed4b370a3838fa65ae1b79974f31979342fff7cc834a0d5f39eb28612642519352ff2a1dd5226ce1f745f8b3156ee3625ffde01219137d064c1ee40",
+      "download_url": "https://cdn.modrinth.com/data/ordsPcFz/versions/Zsh14XeQ/kotlinforforge-4.12.0-all.jar",
+      "official_page": "https://modrinth.com/mod/kotlin-for-forge/version/Zsh14XeQ",
+      "project_id": "ordsPcFz",
+      "version_id": "Zsh14XeQ",
+      "license": "LGPL-2.1-only",
+      "mod_ids": [],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "libIPN",
+      "version": "forge-1.20-4.0.2",
+      "file": "libIPN-forge-1.20-4.0.2.jar",
+      "bytes": 693301,
+      "sha256": "cb96fa15eddc74c243677f7f5b6e3ecaa87bb33f4854ae0353646f304058add6",
+      "sha512": "be677ed6dd4aa60a67ec1b83c89db8ed7460c34f54e5783df94245b9e0a5af9d3e12ebb322cb04210dfaa6527ad1e555a998931adfd69c5a4c57ac0e4dc15819",
+      "download_url": "https://cdn.modrinth.com/data/onSQdWhM/versions/pdAXmKcS/libIPN-forge-1.20-4.0.2.jar",
+      "official_page": "https://modrinth.com/mod/libipn/version/pdAXmKcS",
+      "project_id": "onSQdWhM",
+      "version_id": "pdAXmKcS",
+      "license": "AGPL-3.0-or-later",
+      "mod_ids": [
+        "libipn"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Mouse Tweaks",
+      "version": "1.20.1-2.25.1-forge",
+      "file": "MouseTweaks-forge-mc1.20.1-2.25.1.jar",
+      "bytes": 76237,
+      "sha256": "6c27d16aa715ac6613a55fc463739e2c7b78279e4e4c4cede299e4a2d4a70f08",
+      "sha512": "a3bb0272c0a1a3be9250dfee030bb8f86217fa6a32bd534be8c940fdd8c466c800c2df85874877983ced36ecfc28c8ced6c0d42107c1ab621385b4be9a7c65eb",
+      "download_url": "https://cdn.modrinth.com/data/aC3cM3Vq/versions/7JVXOe3K/MouseTweaks-forge-mc1.20.1-2.25.1.jar",
+      "official_page": "https://modrinth.com/mod/mouse-tweaks/version/7JVXOe3K",
+      "project_id": "aC3cM3Vq",
+      "version_id": "7JVXOe3K",
+      "license": "BSD-3-Clause",
+      "mod_ids": [
+        "mousetweaks"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Oculus",
+      "version": "1.20.1-1.8.0",
+      "file": "oculus-mc1.20.1-1.8.0.jar",
+      "bytes": 2851119,
+      "sha256": "0945df0cba0f62b3901dd80c3268e5311b770ece78c78037a45db12ac0425fef",
+      "sha512": "1bb4ac77400d6684347988ed298a692c2cb15cf7923693607eb8739b171a20fef7412259e9e157111d9ce21779badab386029956f7d2283a9e611722a373e9d5",
+      "download_url": "https://cdn.modrinth.com/data/GchcoXML/versions/iQ1SwGc3/oculus-mc1.20.1-1.8.0.jar",
+      "official_page": "https://modrinth.com/mod/oculus/version/iQ1SwGc3",
+      "project_id": "GchcoXML",
+      "version_id": "iQ1SwGc3",
+      "license": "LGPL-3.0-only",
+      "mod_ids": [
+        "oculus"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Scalable Cat's Force",
+      "version": "3.3.1-build-0",
+      "file": "ScalableCatsForce-3.3.1-build-0-with-library.jar",
+      "bytes": 15852918,
+      "sha256": "4ae39dc3029d8bc4292d55ff20368b7eb69b050af24ebaa487594ab61665da81",
+      "sha512": "e1804cbc111c5ae81a80c808b0ae4db43fdaecf1425fb6070cc26f46426523f77fab4819d3c95f51ec2f03f4a3e52d9645fb45e772b10b1012c72661ef65f401",
+      "download_url": "https://cdn.modrinth.com/data/zr0QMQMo/versions/1qV9Ew3X/ScalableCatsForce-3.3.1-build-0-with-library.jar",
+      "official_page": "https://modrinth.com/mod/scalable-cats-force/version/1qV9Ew3X",
+      "project_id": "zr0QMQMo",
+      "version_id": "1qV9Ew3X",
+      "license": "Apache-2.0",
+      "mod_ids": [],
+      "category": "mods",
+      "providers": [
+        "com.kotori316.scala_lib.ScalaLanguageProvider"
+      ]
+    },
+    {
+      "name": "Searchables",
+      "version": "1.0.3",
+      "file": "Searchables-forge-1.20.1-1.0.3.jar",
+      "bytes": 77732,
+      "sha256": "461add180eb595004d3c9f5ac0ce337752e403077f96b38304800eadf01fb825",
+      "sha512": "185617d6d446f3d4ef6c7d5c6ee4e2fb731a89f7495157313b21292ec6b8e3dbcc10c0379ab49ecb2d0c64d0a78df74750d7f7336d5e6c43516a7c92f278c0a2",
+      "download_url": "https://cdn.modrinth.com/data/fuuu3xnx/versions/PM9yAW1G/Searchables-forge-1.20.1-1.0.3.jar",
+      "official_page": "https://modrinth.com/mod/searchables/version/PM9yAW1G",
+      "project_id": "fuuu3xnx",
+      "version_id": "PM9yAW1G",
+      "license": "MIT",
+      "mod_ids": [
+        "searchables"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Server Tab Info",
+      "version": "1.20-1.3.8",
+      "file": "ServerTabInfo-1.20-1.3.8.jar",
+      "bytes": 103637,
+      "sha256": "d25428542f15a1437613553902513b8a11d09e02266c223f15a70b5e8f778ae7",
+      "sha512": "c9b343c90eb8d8b424ae9de68a2daba946884090011f08e0928a723ad514ac3f00c335ec10d0d6fb87a4f6f5e75d93e50fd601082fbbccec90b0bf936452c9ae",
+      "download_url": "https://cdn.modrinth.com/data/VZptDEBF/versions/TS6p62tK/ServerTabInfo-1.20-1.3.8.jar",
+      "official_page": "https://modrinth.com/mod/server-tab-info/version/TS6p62tK",
+      "project_id": "VZptDEBF",
+      "version_id": "TS6p62tK",
+      "license": "LicenseRef-All-Rights-Reserved",
+      "mod_ids": [
+        "servertabinfo"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Create Slice & Dice",
+      "version": "3.6.0",
+      "file": "sliceanddice-forge-3.6.0.jar",
+      "bytes": 588268,
+      "sha256": "bafdcbeda044603b59eb16059829a6698c1a58d1ce865b8658e598f2718d315a",
+      "sha512": "b6108218d933ba6b612f2018efe1329957c0cde473f07bc405f7defa76602bb2f6749763db5734ec8547e8c5c1908ef57a9c539c90c23068ed9ab5be267e73a0",
+      "download_url": "https://cdn.modrinth.com/data/GmjmRQ0A/versions/KWLI8Ng7/sliceanddice-forge-3.6.0.jar",
+      "official_page": "https://modrinth.com/mod/slice-and-dice/version/KWLI8Ng7",
+      "project_id": "GmjmRQ0A",
+      "version_id": "KWLI8Ng7",
+      "license": "LicenseRef-Custom",
+      "mod_ids": [
+        "sliceanddice"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Upgrader items",
+      "version": "1.2.1",
+      "file": "upgrader-forge-1.2.1-1.20.1.jar",
+      "bytes": 279141,
+      "sha256": "b145adbf1f47e9d63746eb0f47c503e23acf6a4e627d306b2209c3a657e67a75",
+      "sha512": "849449e21ae6ed10a367b9f7179b72660be22d4db5dd5d3557660f6f0104a563ed32cc25979060674b37cc12c8b4eff45d1dbe09a327f0a78c0502adc85be9a0",
+      "download_url": "https://cdn.modrinth.com/data/UQgc9Wcb/versions/nIG81STn/upgrader-forge-1.2.1%2B1.20.1.jar",
+      "official_page": "https://modrinth.com/mod/upgrade-items/version/nIG81STn",
+      "project_id": "UQgc9Wcb",
+      "version_id": "nIG81STn",
+      "license": "LicenseRef-All-Rights-Reserved",
+      "mod_ids": [
+        "upgrader"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Xaero's Minimap",
+      "version": "forge-1.20.1-26.5.0",
+      "file": "xaerominimap-forge-1.20.1-26.5.0.jar",
+      "bytes": 2195399,
+      "sha256": "b21e1b4a13de533d0cf57d55969d5c83b3da78e8be44b93e76cddea9f6503d19",
+      "sha512": "913b1c428b049b9b0376e75edc7ab49bc3df605cf81a4c326b91241314d64c81420df0fc946cd6bd8a9a13f7a45b842d7b86008f32a0cf27d0d3cb278a5e5204",
+      "download_url": "https://cdn.modrinth.com/data/1bokaNcj/versions/Juh6inLY/xaerominimap-forge-1.20.1-26.5.0.jar",
+      "official_page": "https://modrinth.com/mod/xaeros-minimap/version/Juh6inLY",
+      "project_id": "1bokaNcj",
+      "version_id": "Juh6inLY",
+      "license": "LicenseRef-All-Rights-Reserved",
+      "mod_ids": [
+        "xaerominimap"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Xaero's World Map",
+      "version": "forge-1.20.1-1.46.0",
+      "file": "xaeroworldmap-forge-1.20.1-1.46.0.jar",
+      "bytes": 1425022,
+      "sha256": "e00bd87a949cfa8c31d571f4d9646db038e3b98f8cdbb7bd217f3fb9c3780c9e",
+      "sha512": "634f6607dd731d2fef936adbbb3bf16818cf524d78ad8934d3132604276800546e64da2110d8a741df565c3de43cee24d698ac5fac3d588ff925eba43e46ce4c",
+      "download_url": "https://cdn.modrinth.com/data/NcUtCpym/versions/rlPmwaQX/xaeroworldmap-forge-1.20.1-1.46.0.jar",
+      "official_page": "https://modrinth.com/mod/xaeros-world-map/version/rlPmwaQX",
+      "project_id": "NcUtCpym",
+      "version_id": "rlPmwaQX",
+      "license": "LicenseRef-All-Rights-Reserved",
+      "mod_ids": [
+        "xaeroworldmap"
+      ],
+      "category": "mods",
+      "providers": []
+    }
+  ],
+  "configs": [
+    {
+      "path": "config/appleskin-client.toml",
+      "bundle": "appleskin-client.toml",
+      "sha256": "28c6ad7570268b02ec6f73fb7c39c49ecf90f0697d0db9447899e8aa96285200"
+    },
+    {
+      "path": "config/create_connected-common.toml",
+      "bundle": "create_connected-common.toml",
+      "sha256": "e6dcce46f6da0f696ef1df87860c8619c72d95397f167cd7f7b8d8772b20cc21"
+    },
+    {
+      "path": "config/create-client.toml",
+      "bundle": "create-client.toml",
+      "sha256": "5b9ee8bee23d0f12b926567309802eed6f1f46a195726b2b034d692deb833b65"
+    },
+    {
+      "path": "config/create-common.toml",
+      "bundle": "create-common.toml",
+      "sha256": "6c0f6254798808bce8079a1cfafe4d6c082cead42c51d1e3121f3580f8a44eca"
+    },
+    {
+      "path": "config/createaddition-common.toml",
+      "bundle": "createaddition-common.toml",
+      "sha256": "1d28b40d466308be422d511bcd662b26807a9616144055591ccabb53b42fad92"
+    },
+    {
+      "path": "config/do_a_barrel_roll-client.json",
+      "bundle": "do_a_barrel_roll-client.json",
+      "sha256": "65113ba53fca553668bb54342a244cf83cab70bce8240900c62a77c7e9e36e83"
+    },
+    {
+      "path": "config/embeddium-mixins.properties",
+      "bundle": "embeddium-mixins.properties",
+      "sha256": "09ff183e061d93b79514bc171bf9118497578757e7a5c45946039487656e2619"
+    },
+    {
+      "path": "config/embeddium-options.json",
+      "bundle": "embeddium-options.json",
+      "sha256": "b78e1a745d5080dc2e50dd192982aeb59f32b1645626b77ac38a2b725ea52122"
+    },
+    {
+      "path": "config/farmersdelight-client.toml",
+      "bundle": "farmersdelight-client.toml",
+      "sha256": "e4a752b4f86b93e50eeeaf91e045a67be910b0a70c0b582927099bb93c0b3132"
+    },
+    {
+      "path": "config/farmersdelight-common.toml",
+      "bundle": "farmersdelight-common.toml",
+      "sha256": "a05079b5dbd8e2b989a348eb3fb341da5b98a23e1a9f22c86cba866bd646267e"
+    },
+    {
+      "path": "config/flywheel-client.toml",
+      "bundle": "flywheel-client.toml",
+      "sha256": "9dbbbbf8a27341be108f0fa8b557caa1d18a7c7bdc6584ba623bb8358cbfd407"
+    },
+    {
+      "path": "config/forge-client.toml",
+      "bundle": "forge-client.toml",
+      "sha256": "a8448518860cd8b542dadf75521bfab981451775212ee1b51ddc646d998f9311"
+    },
+    {
+      "path": "config/MouseTweaks.cfg",
+      "bundle": "MouseTweaks.cfg",
+      "sha256": "4069ce1a439d8c37453c1b1e9f2037e0942674c7e48723a39b37eab245792ad4"
+    },
+    {
+      "path": "config/oculus.properties",
+      "bundle": "oculus.properties",
+      "sha256": "95f38e874e2caca88fd953dc1cecd60ada7cd45e60f7e30bcafc4a1e37694d6f"
+    },
+    {
+      "path": "config/ponder-client.toml",
+      "bundle": "ponder-client.toml",
+      "sha256": "7508f3f5ceed80c7c606d01ee2dc93e2c72a8afa199ccb691fc5225c894d5bbd"
+    },
+    {
+      "path": "config/sliceanddice-client.toml",
+      "bundle": "sliceanddice-client.toml",
+      "sha256": "62cd1ca516e409a29de0a66158e4bfdcec1cb87841d5eda04df7bf54aa3f218e"
+    },
+    {
+      "path": "config/sliceanddice-common.toml",
+      "bundle": "sliceanddice-common.toml",
+      "sha256": "61656b3d54da0fa7a4d2c297a8e0dcbc701996c4cf1187c063208ab3e46ff693"
+    },
+    {
+      "path": "config/upgrader-common.toml",
+      "bundle": "upgrader-common.toml",
+      "sha256": "3459ec25e28085ecb672a3e5e4197d740e77e0c7f2084fa71bec19abd7344496"
+    },
+    {
+      "path": "options.txt",
+      "bundle": "options.txt",
+      "sha256": "317e76abeb53374c893350b1c4bf36fa28ea8065575856bb00dfc4cbf56685dd"
+    }
+  ],
+  "extras": [
+    {
+      "name": "BSL Shaders",
+      "file": "BSL_v10.1.5.zip",
+      "version": "10.1.5",
+      "bytes": 1133936,
+      "sha256": "1038c018934c43018f9517e326c0cafcf8a3fb83db0d2cce0697fa8ee1289838",
+      "sha512": "ee5f5445b101e6a85942b78e9da1d4266d7ed277a56a83189ac5dc4fab3ce1f8de4c66c52cf87c747f94e871fb2888684aa6763ab907e1c5c9926594d1996504",
+      "download_url": "https://cdn.modrinth.com/data/Q1vvjJYV/versions/yFTiE1Nc/BSL_v10.1.5.zip",
+      "official_page": "https://modrinth.com/shader/bsl-shaders/version/yFTiE1Nc",
+      "project_id": "Q1vvjJYV",
+      "version_id": "yFTiE1Nc",
+      "category": "shaderpacks"
+    },
+    {
+      "name": "MPLOCmods",
+      "file": "MPLOCmods_v40.1.zip",
+      "version": "v40.1",
+      "bytes": 10376553,
+      "sha256": "3e604621a6c9356fb2e676d7b8038cb07c8abdd430abdfe1eccc9afae99dcb90",
+      "sha512": "65dc6417d4fb5f58b9444e387fd958c255025e682342d5226ca21a3b066c9d74ece2441486555337aec7a68724cf0a408c6aa59c665ced1732424e6bd2a3ba9c",
+      "download_url": "https://cdn.modrinth.com/data/xeqX6g8g/versions/EBQQC2KB/MPLOCmods_v40.1.zip",
+      "official_page": "https://modrinth.com/resourcepack/mploc_mods/version/EBQQC2KB",
+      "project_id": "xeqX6g8g",
+      "version_id": "EBQQC2KB",
+      "category": "resourcepacks"
+    }
+  ],
+  "unresolved": [],
+  "preservation": "Existing configs and options are never overwritten. Unmanaged mods are preserved; conflicting mod IDs block installation."
+}

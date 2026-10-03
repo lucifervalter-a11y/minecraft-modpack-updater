@@ -1,0 +1,8 @@
+__pycache__/
+.pytest_cache/
+build/
+dist/
+*.spec
+*.pyc
+.venv/
+.modpack-updater/

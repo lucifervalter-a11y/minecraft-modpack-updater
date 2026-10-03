@@ -1,0 +1,16 @@
+enableVsync:true
+entityShadows:true
+fullscreen:true
+fov:1.0
+renderDistance:12
+simulationDistance:12
+entityDistanceScaling:1.0
+guiScale:3
+particles:0
+maxFps:80
+graphicsMode:1
+ao:true
+biomeBlendRadius:2
+resourcePacks:["vanilla","mod_resources"]
+lang:ru_ru
+mipmapLevels:4
