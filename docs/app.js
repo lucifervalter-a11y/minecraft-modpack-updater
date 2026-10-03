@@ -1,5 +1,41 @@
 'use strict';
 const $ = id => document.getElementById(id);
+async function sha256(bytes) {
+  return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
+}
+$('download-windows').addEventListener('click',async()=>{
+  const button=$('download-windows'), status=$('download-status');
+  button.disabled=true;
+  try {
+    if (!window.isSecureContext || !crypto.subtle) throw Error('Откройте страницу по HTTPS в современном браузере.');
+    status.textContent='Подготавливаем загрузку…';
+    const response=await fetch('downloads/windows-download.json',{cache:'no-store'});
+    if (!response.ok) throw Error('Не удалось получить описание загрузки. Попробуйте ещё раз.');
+    const spec=await response.json();
+    if(spec.schema!==1 || spec.file!=='Minecraft-Modpack-Updater-Windows.zip' || !Number.isInteger(spec.bytes) || spec.bytes<1 || spec.bytes>16000000 || !/^[a-f0-9]{64}$/.test(spec.sha256) || !Array.isArray(spec.parts) || spec.parts.length!==2) throw Error('Некорректное описание загрузки.');
+    let received=0; const chunks=[];
+    for(let i=0;i<2;i++) {
+      const part=spec.parts[i];
+      if(part.file!==spec.file+'.part'+(i+1) || !Number.isInteger(part.bytes) || part.bytes<1 || part.bytes>=8000000 || !/^[a-f0-9]{64}$/.test(part.sha256)) throw Error('Некорректное описание части архива.');
+      status.textContent=`Скачиваем ${i+1}/2… ${Math.round(received/spec.bytes*100)}%`;
+      const r=await fetch('downloads/'+part.file,{cache:'no-store'});
+      if(!r.ok) throw Error(`Не удалось скачать часть ${i+1}. Попробуйте ещё раз.`);
+      const chunk=new Uint8Array(await r.arrayBuffer());
+      if(chunk.length!==part.bytes || await sha256(chunk)!==part.sha256) throw Error(`Проверка SHA256 части ${i+1} не пройдена. ZIP не сохранён; повторите загрузку.`);
+      chunks.push(chunk); received+=chunk.length;
+    }
+    if(received!==spec.bytes) throw Error('Размер архива не совпадает. ZIP не сохранён.');
+    status.textContent='Проверяем SHA256 готового ZIP…';
+    const bytes=new Uint8Array(received);let offset=0;
+    for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}
+    if(await sha256(bytes)!==spec.sha256) throw Error('SHA256 готового ZIP не совпадает. ZIP не сохранён.');
+    const url=URL.createObjectURL(new Blob([bytes],{type:'application/zip'}));
+    const link=document.createElement('a');link.href=url;link.download=spec.file;document.body.append(link);link.click();link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),60000);
+    status.textContent='ZIP готов, SHA256 подтверждён. Если браузер спросит, выберите «Сохранить».';
+  } catch(e) {status.textContent='Загрузка остановлена: '+e.message;}
+  finally {button.disabled=false;}
+});
 let manifest;
 fetch('manifest.json').then(r => { if (!r.ok) throw Error('Манифест недоступен'); return r.json(); }).then(m => {
   manifest=m;
@@ -11,7 +47,7 @@ fetch('manifest.json').then(r => { if (!r.ok) throw Error('Манифест не
 }).catch(() => {$('check-status').textContent='Не удалось загрузить манифест. Обновите страницу или используйте локальный установщик.';});
 function selectLauncher(id) {
   for (const name of ['tlauncher','official']) {$(name).classList.toggle('active',name===id); $(name).setAttribute('aria-pressed',String(name===id));}
-  $('launcher-guide').textContent=id==='official' ? 'Minecraft Launcher → Установки → Новая установка → Forge 1.20.1-47.4.10. Задайте отдельную «Папку игры» (gameDirectory). В дополнительных настройках укажите ту же Java 17, которую выберете в обновляторе.' : 'В TLauncher выберите Forge 1.20.1 / 47.4.10 и папку своей сборки — ту, внутри которой находится mods. Эту же папку укажите в обновляторе.';
+  $('launcher-guide').textContent=id==='official' ? 'Официальный Minecraft Launcher: стандартная папка %APPDATA%\\.minecraft поддерживается и предлагается автоматически. Если у установки Forge задана своя «Папка игры» (gameDirectory), выберите её. Переносить игру не нужно; Java 17 и Forge найдутся автоматически.' : 'В TLauncher выберите Forge 1.20.1 / 47.4.10 и папку своей конкретной сборки — ту, внутри которой находятся её mods. Не выбирайте versions целиком. Java 17 и Forge найдутся автоматически.';
 }
 $('tlauncher').addEventListener('click',()=>selectLauncher('tlauncher'));
 $('official').addEventListener('click',()=>selectLauncher('official'));

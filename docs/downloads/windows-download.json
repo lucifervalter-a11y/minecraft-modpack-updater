@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "file": "Minecraft-Modpack-Updater-Windows.zip",
+  "bytes": 12634088,
+  "sha256": "4cbac7e8570b0b7a3204f60ce256a82fd3b72980f7cb175e257ecafb101f0d48",
+  "parts": [
+    {
+      "file": "Minecraft-Modpack-Updater-Windows.zip.part1",
+      "bytes": 6317044,
+      "sha256": "cc5fc1cea54fa06e78f8a3fe8e8c03af70cdcc16e64fdedeb631b5b2cb6f0abc"
+    },
+    {
+      "file": "Minecraft-Modpack-Updater-Windows.zip.part2",
+      "bytes": 6317044,
+      "sha256": "5ae0b0842a69ac436a498e89441a897daf9f9aac6ea05998353e303ccd415e24"
+    }
+  ]
+}

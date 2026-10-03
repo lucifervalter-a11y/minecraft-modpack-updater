@@ -62,13 +62,22 @@ def safe_path(path):
 
 def profile_path(value):
     p = safe_path(Path(value))
-    if not p.is_dir() or p == Path(p.anchor) or p.name.lower() in ('.minecraft','mods','config','saves','versions'):
-        raise SafetyError('Выберите существующую отдельную папку игры (gameDirectory), не корень лаунчера или mods.')
-    if (p/'launcher_profiles.json').exists():
-        raise SafetyError('Это общая папка лаунчера. Создайте отдельную папку игры.')
+    if not p.is_dir() or p == Path(p.anchor) or p.name.lower() in ('mods','config','saves','versions'):
+        raise SafetyError('Выберите папку игры, внутри которой находится mods. Не выбирайте саму mods, versions или корень диска. Для официального Launcher обычно подходит .minecraft.')
     safe_path(p/'mods')
     safe_path(p/MANAGER)
     return p
+
+def create_profile(parent):
+    """User-chosen parent; create exactly one dedicated child, never launcher root."""
+    parent=safe_path(Path(parent))
+    if not parent.is_dir():raise SafetyError('Выберите существующую папку, внутри которой создать сборку.')
+    for suffix in ('', '-2', '-3', '-4', '-5', '-6', '-7', '-8', '-9'):
+        folder=safe_path(parent/('Minecraft-AEM'+suffix))
+        try:folder.mkdir()
+        except FileExistsError:continue
+        return profile_path(folder)
+    raise SafetyError('Здесь уже есть несколько папок Minecraft-AEM. Выберите другую папку для новой сборки.')
 
 def target(root, relative):
     if relative == STATE:
@@ -222,26 +231,124 @@ def inspect_profile(root, manifest):
             ops[spec['path']]={'path':spec['path'],'before':None,'after':spec['sha256'],'bundled':spec['bundle']}
     return {'root':root,'rows':rows,'ops':list(ops.values()),'managed':managed,'conflicts':conflicts,'outsiders':outsiders}
 
-def check_runtime(java_path, version_path):
+def java_version(java_path, timeout=15):
     java=safe_path(Path(java_path))
     if java.name.lower() not in ('java.exe','java') or not java.is_file():
         raise SafetyError('Выберите исполняемый файл bin/java.exe из Java 17')
-    result=subprocess.run([str(java),'-version'],capture_output=True,text=True,timeout=15,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
-    match=re.search(r'(?:openjdk|java) version "(\d+)',result.stderr+'\n'+result.stdout)
-    if result.returncode!=0 or not match or int(match[1])!=17:
-        raise SafetyError('Выбранная Java не имеет версии 17')
+    result=subprocess.run([str(java),'-version'],capture_output=True,text=True,errors='replace',timeout=timeout,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+    match=re.search(r'(?:openjdk|java) version "([^"\s]+)',result.stderr+'\n'+result.stdout)
+    if result.returncode!=0 or not match:
+        raise SafetyError('Не удалось определить версию Java')
+    return match[1]
+
+def forge_metadata(version_path):
     version=safe_path(Path(version_path))
     if version.suffix.lower()!='.json' or version.stem!=version.parent.name or re.search(r'(?i)account|token|launcher_profile',version.name):
         raise SafetyError('Выберите versions/<версия>/<версия>.json, а не файл настроек лаунчера')
     data=read_json(version)
-    libraries={item.get('name','') for item in data.get('libraries',[])}
+    libraries={item.get('name','') for item in data.get('libraries',[]) if isinstance(item,dict)}
     pins={'net.minecraftforge:forge:1.20.1-47.4.10','net.minecraftforge:fmlloader:1.20.1-47.4.10'}
     if not libraries & pins:
         raise SafetyError('В выбранном JSON не найден Forge 47.4.10 для Minecraft 1.20.1')
-    declared=data.get('javaVersion',{}).get('majorVersion',17)
-    if declared!=17:
+    if data.get('javaVersion',{}).get('majorVersion',17)!=17:
         raise SafetyError('Версия требует другую Java')
+    return True
+
+def check_runtime(java_path, version_path):
+    actual=java_version(java_path)
+    if actual.split('.')[0]!='17':
+        raise SafetyError(f'Выбрана Java {actual}, а для этой сборки нужна Java 17. Нажмите «Найти Java и Forge». Если Java 17 ещё нет, один раз запустите Minecraft 1.20.1 в лаунчере, закройте игру и повторите поиск.')
+    forge_metadata(version_path)
     return 'Minecraft 1.20.1 / Forge 47.4.10: метаданные подтверждены. Выбранная Java: 17.'
+
+def discovery_roots(selected=None):
+    """Fixed launcher subdirectories only. Never enumerate the home/drive root."""
+    roots=[]; direct=[]
+    if selected:
+        p=profile_path(selected)
+        roots.append(('Выбранная папка',p))
+        direct.append(p/(p.name+'.json'))
+        if p.parent.name.lower()=='versions':
+            roots.append(('Лаунчер выбранной сборки',safe_path(p.parent.parent)))
+    appdata=os.environ.get('APPDATA')
+    if appdata:
+        roots.extend([('Minecraft',Path(appdata)/'.minecraft'),('TLauncher',Path(appdata)/'.tlauncher')])
+    runtime=[];versions=[]
+    for label,base in roots:
+        for name in ('runtime','jvms','jre','java'):
+            runtime.append((label,base/name))
+        versions.append((label,base/'versions'))
+    return runtime,versions,direct
+
+def runtime_help(found):
+    missing=[]
+    if not found['java']:
+        missing.append('Java 17 не найдена. В официальном Minecraft Launcher создайте установку версии 1.20.1, запустите её один раз до меню и закройте. В TLauncher один раз запустите Minecraft 1.20.1. Затем нажмите «Найти Java и Forge» снова. Отдельно искать java.exe обычно не нужно.')
+    if not found['forge']:
+        missing.append('Forge 47.4.10 не найден. Установите Forge 47.4.10 для Minecraft 1.20.1, затем повторите поиск. Если лаунчер хранит игру в другой папке, выберите папку своей сборки или используйте «Указать…».')
+    return '\n'.join(missing)
+
+def discover_runtime(selected=None, progress=lambda message:None):
+    runtimes,versions,direct=discovery_roots(selected)
+    found={'java':[],'forge':[],'checked_java':0,'skipped_java':0,'bounded':True}
+    seen_dirs=set();seen_java=set();seen_json=set();budget=160
+    # Traverse only the runtime subtrees, with depth/count limits. Once bin/java
+    # is found, do not descend into that runtime's lib, legal or other content.
+    for label,root in runtimes:
+        queue=[(root,0)]
+        while queue and budget>0 and found['checked_java']<12:
+            folder,depth=queue.pop(0)
+            key=str(folder).lower()
+            if key in seen_dirs:continue
+            seen_dirs.add(key);budget-=1
+            try:
+                safe_path(folder)
+                if not folder.is_dir():continue
+                candidate=folder/'bin/java.exe'
+                if candidate.is_file():
+                    safe_path(candidate)
+                    java_key=str(candidate).lower()
+                    if java_key not in seen_java:
+                        seen_java.add(java_key);found['checked_java']+=1
+                        progress('Проверяем Java в стандартной папке лаунчера…')
+                        ver=java_version(candidate,timeout=4)
+                        if ver.split('.')[0]=='17':
+                            found['java'].append({'path':str(candidate),'version':ver,'label':f'Java {ver} · {label} / {folder.name}'})
+                        else:found['skipped_java']+=1
+                    continue
+                if depth<5:
+                    children=[]
+                    for child in folder.iterdir():
+                        if child.is_dir() and not child.is_symlink():children.append(child)
+                        if len(children)>=40:break
+                    children.sort(key=lambda p:('gamma' not in p.name.lower(),p.name.lower()))
+                    queue.extend((child,depth+1) for child in children)
+            except (OSError,SafetyError,subprocess.TimeoutExpired,ValueError):continue
+    candidates=[('Выбранная сборка',p) for p in direct]
+    for label,parent in versions:
+        try:
+            safe_path(parent)
+            if not parent.is_dir():continue
+            count=0
+            for folder in parent.iterdir():
+                count+=1
+                if count>120:break
+                if folder.is_dir() and not folder.is_symlink():
+                    # Exactly one version JSON per child; never recurse into mods,
+                    # configs, backup folders, accounts or launcher settings.
+                    candidates.append((label,folder/(folder.name+'.json')))
+        except (OSError,SafetyError):continue
+    for label,path in candidates:
+        key=str(path).lower()
+        if key in seen_json:continue
+        seen_json.add(key)
+        try:
+            safe_path(path)
+            if not path.is_file():continue
+            forge_metadata(path)
+            found['forge'].append({'path':str(path),'label':f'Forge 47.4.10 · {label} / {path.parent.name}'})
+        except (OSError,SafetyError,ValueError,TypeError,AttributeError):continue
+    return found
 
 def require_closed():
     if os.name!='nt': return
@@ -407,52 +514,122 @@ def gui():
     from tkinter import ttk,filedialog,messagebox
     import threading,queue
     m=load_manifest()
-    window=tk.Tk(); window.title('Minecraft • Проверка и обновление'); window.geometry('930x760'); window.minsize(780,660)
+    window=tk.Tk(); window.title('Minecraft • Обновлятор r5 • Автопоиск'); window.geometry('930x850'); window.minsize(780,760)
     style=ttk.Style(); style.theme_use('clam'); style.configure('.',font=('Segoe UI',10)); style.configure('Title.TLabel',font=('Segoe UI',21,'bold'))
     frame=ttk.Frame(window,padding=24); frame.pack(fill='both',expand=True)
     ttk.Label(frame,text='Ваша сборка. Все моды на месте.',style='Title.TLabel').pack(anchor='w')
     ttk.Label(frame,text='Minecraft 1.20.1  •  Forge 47.4.10  •  Java 17  •  23 мода',padding=(0,8,0,16)).pack(anchor='w')
-    launcher=tk.StringVar(value='TLauncher'); folder=tk.StringVar(); java=tk.StringVar(); version=tk.StringVar()
+    default_game=Path(os.environ.get('APPDATA',''))/'.minecraft'
+    default_folder=str(default_game) if default_game.is_absolute() and default_game.is_dir() else ''
+    launcher=tk.StringVar(value='Официальный Minecraft Launcher'); folder=tk.StringVar(value=default_folder); java=tk.StringVar(); version=tk.StringVar()
+    java_view=tk.StringVar(value='Найдём автоматически'); forge_view=tk.StringVar(value='Найдём автоматически')
+    java_choices={};forge_choices={}
     selectors=ttk.Frame(frame); selectors.pack(fill='x')
     ttk.Label(selectors,text='Лаунчер').grid(row=0,column=0,sticky='w',pady=5)
     ttk.Combobox(selectors,textvariable=launcher,values=['TLauncher','Официальный Minecraft Launcher'],state='readonly',width=38).grid(row=0,column=1,sticky='w')
     def choose(var,kind):
-        value=filedialog.askdirectory(title='Отдельная папка игры (gameDirectory)') if kind=='folder' else filedialog.askopenfilename(title=('Java 17: bin/java.exe' if kind=='java' else 'versions/версия/версия.json'),filetypes=([('Java','java.exe')] if kind=='java' else [('Метаданные версии','*.json')]))
-        if value: var.set(value)
-    for row,label,var,kind in [(1,'Папка игры',folder,'folder'),(2,'Java 17',java,'java'),(3,'JSON версии Forge',version,'version')]:
+        value=filedialog.askdirectory(title='Папка игры с mods. Для официального Launcher обычно .minecraft.') if kind=='folder' else filedialog.askopenfilename(title=('Java 17: bin/java.exe' if kind=='java' else 'versions/версия/версия.json'),filetypes=([('Java','java.exe')] if kind=='java' else [('Метаданные версии','*.json')]))
+        if value:
+            var.set(value)
+            if kind=='folder':window.after(50,lambda:task('detect'))
+            elif kind=='java':java_view.set('Указано вручную: '+str(Path(value).parent.parent.name))
+            else:forge_view.set('Указано вручную: '+Path(value).parent.name)
+    def new_profile():
+        parent=filedialog.askdirectory(title='Где создать отдельную сборку? Внутри появится папка Minecraft-AEM.',mustexist=True)
+        if not parent:return
+        try:
+            created=create_profile(parent);folder.set(str(created))
+        except Exception as e:messagebox.showerror('Не удалось создать папку',str(e));return
+        window.clipboard_clear();window.clipboard_append(str(created))
+        if launcher.get()=='TLauncher':
+            text='В TLauncher укажите эту же папку в настройках папки игры для Forge 1.20.1 / 47.4.10.'
+        else:
+            text='В Minecraft Launcher откройте «Установки» → свою установку Forge → «Изменить» → «Папка игры» и вставьте этот путь. Сохраните установку.'
+        messagebox.showinfo('Отдельная сборка создана',f'Создана папка:\n{created}\n\nПуть уже скопирован в буфер обмена.\n\n{text}\n\nПапка в обновляторе и лаунчере должна совпадать. Аккаунты, миры и старые профили не переносились.')
+        window.after(50,lambda:task('detect'))
+    for row,label,var,kind in [(1,'Папка игры',folder,'folder'),(2,'Java 17',java,'java'),(3,'Forge 47.4.10',version,'version')]:
         ttk.Label(selectors,text=label).grid(row=row,column=0,sticky='w',padx=(0,12),pady=7)
-        ttk.Entry(selectors,textvariable=var).grid(row=row,column=1,sticky='ew')
-        ttk.Button(selectors,text='Выбрать…',command=lambda v=var,k=kind:choose(v,k)).grid(row=row,column=2,padx=(8,0))
+        if kind=='folder':ttk.Entry(selectors,textvariable=var).grid(row=row,column=1,sticky='ew')
+        elif kind=='java':
+            java_combo=ttk.Combobox(selectors,textvariable=java_view,state='readonly')
+            java_combo.grid(row=row,column=1,sticky='ew')
+            java_combo.bind('<<ComboboxSelected>>',lambda e:java.set(java_choices[java_view.get()]))
+        else:
+            forge_combo=ttk.Combobox(selectors,textvariable=forge_view,state='readonly')
+            forge_combo.grid(row=row,column=1,sticky='ew')
+            forge_combo.bind('<<ComboboxSelected>>',lambda e:version.set(forge_choices[forge_view.get()]))
+        ttk.Button(selectors,text='Выбрать…' if kind=='folder' else 'Указать…',command=lambda v=var,k=kind:choose(v,k)).grid(row=row,column=2,padx=(8,0))
     selectors.columnconfigure(1,weight=1)
+    create_button=ttk.Button(selectors,text='Создать отдельную сборку',command=new_profile)
+    create_button.grid(row=4,column=1,sticky='w',pady=(7,0))
+    detection_note=tk.StringVar(value='Проверяем стандартные папки лаунчеров. Аккаунты и настройки входа не читаются.')
+    auto_button=ttk.Button(selectors,text='Найти Java и Forge',command=lambda:task('detect'))
+    auto_button.grid(row=5,column=1,sticky='w',pady=(7,0))
+    ttk.Label(frame,textvariable=detection_note,wraplength=840,padding=(0,10,0,0)).pack(fill='x')
     guide=tk.StringVar()
     def help_text(*args):
-        guide.set('TLauncher: выберите папку конкретной сборки с mods. В настройках запуска укажите эту же папку и выбранную Java 17.' if launcher.get()=='TLauncher' else 'Minecraft Launcher → Установки → Новая установка → Forge 1.20.1-47.4.10 → Папка игры: выбранная папка. В дополнительных настройках задайте ту же Java 17.')
+        official=launcher.get()=='Официальный Minecraft Launcher'
+        guide.set('Официальный Launcher: обычная папка игры — %APPDATA%\\.minecraft, она подходит. Если в установке Forge задана своя «Папка игры», выберите её. Переносить игру не нужно.' if official else 'TLauncher: выберите папку своей конкретной сборки — ту, внутри которой находятся её mods. Не выбирайте versions целиком. Java и Forge будут найдены автоматически.')
+        if args:
+            folder.set(default_folder if official else '')
+            window.after(50,lambda:task('detect'))
     launcher.trace_add('write',help_text); help_text()
     ttk.Label(frame,textvariable=guide,wraplength=840,padding=(0,14)).pack(fill='x')
-    ttk.Label(frame,text='Выбор JSON подтверждает установленную версию, но не активную установку лаунчера.\nПроверка не скачивает файлы. Установка добавляет отсутствующие настройки; существующие сохраняет.',wraplength=840).pack(anchor='w')
-    table=ttk.Treeview(frame,columns=('version','status'),height=10); table.heading('#0',text='Мод / дополнение'); table.heading('version',text='Версия'); table.heading('status',text='Результат'); table.column('#0',width=360); table.column('version',width=220); table.column('status',width=120)
+    ttk.Label(frame,text='Java и Forge ищутся автоматически в папках Minecraft/TLauncher и выбранной сборке.\nНайденный Forge нужно выбрать также в лаунчере. Существующие настройки сохраняются.',wraplength=840).pack(anchor='w')
+    table=ttk.Treeview(frame,columns=('version','status'),height=6); table.heading('#0',text='Мод / дополнение'); table.heading('version',text='Версия'); table.heading('status',text='Результат'); table.column('#0',width=360); table.column('version',width=220); table.column('status',width=120)
     table.pack(fill='both',expand=True,pady=14)
-    status=tk.StringVar(value='Выберите папку и нажмите «Проверить». Java и JSON можно указать после проверки модов.')
+    status=tk.StringVar(value='Выберите папку игры и нажмите «Проверить». Java и Forge подберём автоматически.')
     ttk.Label(frame,textvariable=status,wraplength=840).pack(anchor='w')
     controls=ttk.Frame(frame); controls.pack(fill='x',pady=(15,0))
-    events=queue.Queue(); buttons=[]
+    events=queue.Queue(); buttons=[auto_button,create_button];working=[False]
+    def use_found(found):
+        java_choices.clear();forge_choices.clear()
+        for i,c in enumerate(found['java'],1):java_choices[f"{i}. {c['label']}"]=c['path']
+        for i,c in enumerate(found['forge'],1):forge_choices[f"{i}. {c['label']}"]=c['path']
+        java_combo.configure(values=list(java_choices));forge_combo.configure(values=list(forge_choices))
+        for choices,var,view in [(java_choices,java,java_view),(forge_choices,version,forge_view)]:
+            if choices:
+                label=next((label for label,path in choices.items() if path==var.get()),next(iter(choices)))
+                var.set(choices[label]);view.set(label)
+            else:var.set('');view.set('Не найдено — см. подсказку ниже')
+        if found['java'] and found['forge']:
+            detection_note.set(f"Найдена Java {found['java'][0]['version']} и Forge 47.4.10. Ручной поиск файлов не нужен.")
+        else:detection_note.set(runtime_help(found))
     def task(kind):
+        if working[0]:return
         selected=folder.get(); selected_java=java.get(); selected_version=version.get()
-        if not selected: messagebox.showerror('Папка не выбрана','Выберите отдельную папку игры.'); return
-        if kind=='apply' and not messagebox.askyesno('Установить набор?', 'Будут скачаны только отсутствующие или управляемые моды и дополнения из манифеста. Чужие файлы сохраняются. Настройки добавляются только при отсутствии.\n\nЗакройте игру и лаунчеры. Продолжить?'): return
+        if not selected and kind!='detect': messagebox.showerror('Папка не выбрана','Выберите папку игры с mods. Для официального Launcher обычно подходит .minecraft.'); return
+        if kind=='apply':
+            try:preview=inspect_profile(selected,m)
+            except Exception as e:messagebox.showerror('Проверка папки',str(e));return
+            if preview['conflicts']:messagebox.showerror('Нужна проверка конфликтов','\n'.join(preview['conflicts']));return
+            changes='\n'.join(op['path'] for op in preview['ops'][:12]) or 'Файлы набора уже совпадают.'
+            if len(preview['ops'])>12:changes+=f"\n… ещё {len(preview['ops'])-12} файлов"
+            explanation=f'Папка игры:\n{selected}\n\nПлан изменений:\n{changes}\n\nПеред записью будут проверены загрузки и создан backup. Посторонние моды и существующие настройки сохраняются. Аккаунты и миры не затрагиваются.\n\nЗакройте игру и лаунчер. Установить?'
+            if not messagebox.askyesno('Проверка перед установкой',explanation):return
         if kind=='rollback' and not messagebox.askyesno('Откат', 'Вернуть файлы последней операции? Файлы, изменённые после установки, не перезаписываются.'): return
         for b in buttons: b.configure(state='disabled')
+        working[0]=True
         status.set('Выполняется…')
         def worker():
             try:
+                chosen_java=selected_java;chosen_version=selected_version
+                if kind=='detect' or (kind in ('apply','check') and (not chosen_java or not chosen_version)):
+                    found=discover_runtime(selected or None,lambda s:events.put(('status',s)))
+                    events.put(('found',found))
+                    chosen_java=found['java'][0]['path'] if found['java'] else ''
+                    chosen_version=found['forge'][0]['path'] if found['forge'] else ''
+                    if kind=='detect':
+                        events.put(('detected','Автопоиск завершён. Выберите папку игры и нажмите «Проверить».'));return
+                    if kind=='apply' and (not chosen_java or not chosen_version):raise SafetyError(runtime_help(found))
                 if kind=='rollback': result='Откат выполнен: '+rollback(selected)
                 elif kind=='apply':
-                    check_runtime(selected_java,selected_version)
+                    check_runtime(chosen_java,chosen_version)
                     result=apply(selected,m,lambda s:events.put(('status',s)))
                 else:
                     result='Проверка модов завершена.'
-                    if selected_java and selected_version: result=check_runtime(selected_java,selected_version)
-                    else: result+=' Java и Forge ещё не проверены.'
+                    if chosen_java and chosen_version: result=check_runtime(chosen_java,chosen_version)
+                    else: result+=' Java или Forge не найдены: следуйте подсказке над списком.'
                 plan=inspect_profile(selected,m)
                 if plan['conflicts']: result+=' Конфликт: '+'; '.join(plan['conflicts'])
                 elif plan['outsiders']: result+=f" Посторонних JAR сохранено: {len(plan['outsiders'])}. Их совместимость не гарантируется."
@@ -466,9 +643,12 @@ def gui():
         while not events.empty():
             event,data=events.get()
             if event=='status': status.set(data)
+            elif event=='found':use_found(data)
             else:
+                working[0]=False
                 for b in buttons: b.configure(state='normal')
                 if event=='error': status.set('Остановлено: '+data); messagebox.showerror('Операция остановлена',data)
+                elif event=='detected':status.set(data)
                 else:
                     message,rows=data; status.set(message)
                     for child in table.get_children(): table.delete(child)
@@ -478,9 +658,12 @@ def gui():
         if any(str(b['state'])=='disabled' for b in buttons):
             messagebox.showinfo('Операция выполняется','Дождитесь завершения скачивания или записи файлов.'); return
         window.destroy()
-    window.protocol('WM_DELETE_WINDOW',close); poll(); window.mainloop()
+    window.protocol('WM_DELETE_WINDOW',close); poll();window.after(150,lambda:task('detect')); window.mainloop()
 
 if __name__=='__main__':
+    if '--self-test-java17' in sys.argv:
+        found=discover_runtime()
+        sys.exit(0 if found['java'] and found['forge'] and check_runtime(found['java'][0]['path'],found['forge'][0]['path']) else 2)
     if '--self-test' in sys.argv:
         m=load_manifest()
         for c in m['configs']:

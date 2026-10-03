@@ -1,6 +1,6 @@
 {
   "unit_tests": {
-    "passed": 24,
+    "passed": 32,
     "failed": 0
   },
   "official_downloads": [
@@ -189,5 +189,35 @@
     "repository": "https://github.com/lucifervalter-a11y/minecraft-modpack-updater",
     "owner": "parent agent",
     "pages_live_url_verified": false
+  },
+  "split_download": {
+    "checks": [
+      "No archive-part downloads before explicit button click",
+      "One click saves valid Windows ZIP with original exact bytes and SHA256",
+      "Desktop/mobile download button and completion status fit",
+      "Corrupt part rejected by SHA256 without saving any ZIP",
+      "Missing second part stops download and allows retry",
+      "Whole-archive SHA256 independently verified after both parts pass"
+    ],
+    "errors": [],
+    "assembled_sha256": "4cbac7e8570b0b7a3204f60ce256a82fd3b72980f7cb175e257ecafb101f0d48",
+    "modpack_manifest_sha256": "69e13bb9a33809edc53c11f1696bef9b3713e0b4c66f6fec7c507c89b1c2f9b2"
+  },
+  "runtime_auto": {
+    "automatic_java17_selection": "PASS",
+    "automatic_forge_selection": "PASS",
+    "install_button_visible_in_layout": "PASS",
+    "install_invoked": false,
+    "java_version": "17.0.15",
+    "windowed_exe_java17_forge_exit_code": 0,
+    "real_java_version": "Microsoft 17.0.15",
+    "java21_excluded": true
+  },
+  "official_default_game_directory": {
+    "supported": ".minecraft",
+    "launcher_accounts_saves_preserved": "PASS",
+    "launcher_account_json_not_read": "PASS",
+    "preview_before_apply": true,
+    "new_directory_optional": true
   }
 }

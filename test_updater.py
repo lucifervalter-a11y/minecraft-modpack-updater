@@ -118,8 +118,8 @@ class UpdaterTests(unittest.TestCase):
     def test_network_and_root_profile_rejected(self):
         for path in ('//server/share/profile',str(Path(self.root.anchor))):
             with self.assertRaises(u.SafetyError):u.profile_path(path)
-        (self.root/'launcher_profiles.json').write_bytes(b'not to read')
-        with self.assertRaises(u.SafetyError):u.profile_path(self.root)
+        invalid=self.base/'mods';invalid.mkdir()
+        with self.assertRaises(u.SafetyError):u.profile_path(invalid)
     def test_url_policy(self):
         for url in ('http://cdn.modrinth.com/data/a','https://evil.test/a','https://cdn.modrinth.com.evil.test/data/a','https://x@cdn.modrinth.com/data/a','https://cdn.modrinth.com/data/a?x=1'):
             with self.assertRaises(u.SafetyError):u.valid_url(url)
@@ -146,5 +146,86 @@ class UpdaterTests(unittest.TestCase):
         (self.root/u.MANAGER).mkdir()
         (self.root/u.STATE).write_text(json.dumps({'schema':1,'managed':{'bad':{'path':'options.txt','sha256':'a'*64}}}))
         with self.assertRaises(u.SafetyError):self.install()
+
+    def test_java_vendor_outputs_and_actual_wrong_version_message(self):
+        java=self.base/'java.exe';java.write_bytes(b'fixture')
+        outputs=[('openjdk version "17.0.15" 2025-04-15\nOpenJDK Runtime Environment Microsoft-11351406','17.0.15'),
+                 ('openjdk version "17.0.16" 2025-07-15\nOpenJDK Runtime Environment Temurin-17.0.16+8','17.0.16'),
+                 ('java version "17.0.12" 2024-07-16 LTS\nJava(TM) SE Runtime Environment','17.0.12'),
+                 ('openjdk version "17.0.10" 2024-01-16 LTS\nOpenJDK Runtime Environment Zulu17.48+15','17.0.10'),
+                 ('openjdk version "21.0.7" 2025-04-15','21.0.7')]
+        for text,expected in outputs:
+            for channel in ('stdout','stderr'):
+                result=type('Result',(),{'returncode':0,'stdout':'','stderr':'',channel:text})()
+                with patch.object(u.subprocess,'run',return_value=result):self.assertEqual(u.java_version(java),expected)
+        with patch.object(u,'java_version',return_value='21.0.7'):
+            with self.assertRaisesRegex(u.SafetyError,'21.0.7'):u.check_runtime(java,self.base/'unused.json')
+
+    def make_runtime_fixture(self):
+        appdata=self.base/'AppData';mc=appdata/'.minecraft'
+        good=mc/'runtime/java-runtime-gamma/windows/java-runtime-gamma/bin/java.exe'
+        bad=mc/'runtime/java-runtime-delta/windows/java-runtime-delta/bin/java.exe'
+        outside=appdata/'unrelated/bin/java.exe'
+        for p in (good,bad,outside):p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b'fixture')
+        version=mc/'versions/1.20.1-forge-47.4.10/1.20.1-forge-47.4.10.json'
+        version.parent.mkdir(parents=True);version.write_text(json.dumps({'libraries':[{'name':'net.minecraftforge:forge:1.20.1-47.4.10'}]}))
+        (mc/'launcher_profiles.json').write_bytes(b'DO NOT READ')
+        (mc/'accounts.json').write_bytes(b'DO NOT READ')
+        return appdata,good,bad,outside,version
+
+    def test_auto_finds_gamma_and_skips_java21_without_scanning_other_dirs(self):
+        appdata,good,bad,outside,version=self.make_runtime_fixture()
+        def fake_java(path,timeout=15):
+            self.assertNotEqual(path,outside)
+            return '17.0.15' if path==good else '21.0.7'
+        before={str(p):p.read_bytes() for p in appdata.rglob('*') if p.is_file()}
+        with patch.dict(os.environ,{'APPDATA':str(appdata)}),patch.object(u,'java_version',fake_java):
+            found=u.discover_runtime()
+        self.assertEqual([x['path'] for x in found['java']],[str(good)])
+        self.assertEqual(found['forge'][0]['path'],str(version))
+        self.assertEqual(found['skipped_java'],1)
+        self.assertEqual(before,{str(p):p.read_bytes() for p in appdata.rglob('*') if p.is_file()})
+
+    def test_auto_prioritizes_selected_profile_metadata(self):
+        appdata,good,bad,outside,version=self.make_runtime_fixture()
+        own=self.root/(self.root.name+'.json');own.write_text(version.read_text())
+        with patch.dict(os.environ,{'APPDATA':str(appdata)}),patch.object(u,'java_version',return_value='17.0.15'):
+            found=u.discover_runtime(self.root)
+        self.assertEqual(found['forge'][0]['path'],str(own))
+
+    def test_auto_missing_runtime_gives_minecraft_1201_instruction(self):
+        with patch.dict(os.environ,{'APPDATA':str(self.base/'missing')}):found=u.discover_runtime(self.root)
+        self.assertEqual(found['java'],[]);self.assertEqual(found['forge'],[])
+        self.assertIn('1.20.1',u.runtime_help(found));self.assertIn('один раз',u.runtime_help(found))
+
+    def test_auto_depth_limit(self):
+        mc=self.base/'AppData/.minecraft';deep=mc/'runtime/a/b/c/d/e/f/g/bin/java.exe'
+        deep.parent.mkdir(parents=True);deep.write_bytes(b'not executed')
+        with patch.dict(os.environ,{'APPDATA':str(self.base/'AppData')}),patch.object(u,'java_version',side_effect=AssertionError('out of scope')):
+            self.assertEqual(u.discover_runtime()['java'],[])
+
+    def test_create_dedicated_profile_and_preserve_existing(self):
+        old=self.base/'Minecraft-AEM';old.mkdir();(old/'accounts.json').write_bytes(b'not read or changed')
+        created=u.create_profile(self.base)
+        self.assertEqual(created.name,'Minecraft-AEM-2')
+        self.assertEqual(list(created.iterdir()),[])
+        self.assertEqual((old/'accounts.json').read_bytes(),b'not read or changed')
+        self.assertEqual(u.profile_path(created),created)
+
+    def test_create_profile_rejects_network_parent(self):
+        with self.assertRaises(u.SafetyError):u.create_profile('//server/share')
+
+    def test_official_default_minecraft_preserves_launcher_accounts_and_saves(self):
+        self.root=self.base/'.minecraft';self.root.mkdir()
+        sentinels={'launcher_profiles.json':b'private launcher profile','launcher_accounts.json':b'private account','accounts.json':b'private token','saves/world/level.dat':b'world','config/keep.toml':b'custom config','mods/extra.jar':jar('other')}
+        for rel,data in sentinels.items():
+            p=self.root/rel;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
+        original=u.read_json
+        def guarded(path,*args,**kwargs):
+            self.assertNotIn(path.name,('launcher_profiles.json','launcher_accounts.json','accounts.json'))
+            return original(path,*args,**kwargs)
+        with patch.object(u,'read_json',guarded):
+            self.install();u.rollback(self.root)
+        for rel,data in sentinels.items():self.assertEqual((self.root/rel).read_bytes(),data)
 
 if __name__=='__main__':unittest.main(verbosity=2)

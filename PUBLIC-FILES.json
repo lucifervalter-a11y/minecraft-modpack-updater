@@ -4,8 +4,8 @@
   "files": [
     {
       "path": "updater.py",
-      "bytes": 29395,
-      "sha256": "37c52f6f6a2fd6dee524117a6ad2df520973231e8b359cd2d851f830e8acc54b"
+      "bytes": 42076,
+      "sha256": "135ba7121e90c243eb32b2b509980530ca94ee1739c0520c9ae8a30c0780caa0"
     },
     {
       "path": "manifest.json",
@@ -19,8 +19,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 10801,
-      "sha256": "53fcecc4bfd2792006ecccfb8868a523297029e38f44dc76f1462eacddaad58a"
+      "bytes": 14402,
+      "sha256": "a54f59597dc6a336e37a6552e35faa917edd8178f3ae7135cb8ebec1bae222a8"
     },
     {
       "path": "LICENSE",
@@ -29,13 +29,18 @@
     },
     {
       "path": "test_updater.py",
-      "bytes": 10000,
-      "sha256": "5da8d8712660e9c594935f2723c356d7fe79c4fbf391f54582aaaa32b0211edc"
+      "bytes": 15511,
+      "sha256": "df23b04ae7784189e7c31fa25ffce3b956072dd366479e3b5d36339765f9c0b6"
     },
     {
       "path": "build_release.py",
-      "bytes": 1484,
-      "sha256": "7d4f896bc0a4f556a9b51806a760cf6566f23d579e60e0b30a7359d54a43e9a6"
+      "bytes": 1678,
+      "sha256": "7d5eabca3842de6c2d4c2d2dd741d02fc0b1c05fa663437efc5512949d6c1e3f"
+    },
+    {
+      "path": "split_download.py",
+      "bytes": 926,
+      "sha256": "f014db3f17cd23c8c03e98a13d4153d408fe19f7ab81e0a4e90500c85aab90c8"
     },
     {
       "path": "requirements-build.txt",
@@ -49,8 +54,8 @@
     },
     {
       "path": "VERIFICATION.json",
-      "bytes": 6314,
-      "sha256": "f7f1f88e7d83dc7d50e964fd4ae8610bde2e214afab1a65080a10bfc3ee44375"
+      "bytes": 7587,
+      "sha256": "e9337965c8306c7d29d4acad81cd3057bf6624058d4ff467f4fb1c376565194d"
     },
     {
       "path": "presets/appleskin-client.toml",
@@ -154,28 +159,38 @@
     },
     {
       "path": "docs/app.js",
-      "bytes": 4338,
-      "sha256": "bad5174ccac2d88544fc596e1f0ff5a78562d3849cdef851ce89b35b2fe4a451"
+      "bytes": 7618,
+      "sha256": "c67ec95f183c618f860fbf179e2363f0526a4585579669cfcdc23824a668cb12"
     },
     {
       "path": "docs/downloads/Minecraft-Modpack-Updater-Source.zip",
-      "bytes": 39019,
-      "sha256": "a68ae0e01418fc888b2cf4ab994c4ff45ca644815d67eb82ea3d40c74a6e0803"
+      "bytes": 45253,
+      "sha256": "c40fd75d967418e7c5c02153874eadbd007f621bece73196c4565b13f4fba253"
     },
     {
-      "path": "docs/downloads/Minecraft-Modpack-Updater-Windows.zip",
-      "bytes": 12624738,
-      "sha256": "81c93e8e888db89f0b5195edd545e246673312fa0e7ce854623a3e5562ae983a"
+      "path": "docs/downloads/Minecraft-Modpack-Updater-Windows.zip.part1",
+      "bytes": 6317044,
+      "sha256": "cc5fc1cea54fa06e78f8a3fe8e8c03af70cdcc16e64fdedeb631b5b2cb6f0abc"
+    },
+    {
+      "path": "docs/downloads/Minecraft-Modpack-Updater-Windows.zip.part2",
+      "bytes": 6317044,
+      "sha256": "5ae0b0842a69ac436a498e89441a897daf9f9aac6ea05998353e303ccd415e24"
     },
     {
       "path": "docs/downloads/SHA256SUMS.txt",
-      "bytes": 209,
-      "sha256": "41f6ae922cc07127b80c720bb606eb47799f269f5f92161de7831da153b8acd9"
+      "bytes": 502,
+      "sha256": "53e4e195d862982623bf589f390bd9cfeb33f03dd733208838d3be56116caf30"
+    },
+    {
+      "path": "docs/downloads/windows-download.json",
+      "bytes": 567,
+      "sha256": "6956c35e2cf3fdfb5086ea7ba7e37d04fc5c5f931bd2a8164e36d335281a6e31"
     },
     {
       "path": "docs/index.html",
-      "bytes": 9240,
-      "sha256": "ef91764516f52ed34e45fdf8c2383b6302ff48cc64489abbb4bc054be80c6f36"
+      "bytes": 10194,
+      "sha256": "2b6df8e95b325f08f25595dc2c57ab907647d49e3bc5a32e6eec5e0fd1cfa486"
     },
     {
       "path": "docs/manifest.json",
@@ -188,15 +203,15 @@
       "sha256": "5ee7b849bd8484be81c0a6112a3e5ff38bec142a403acf5c10232cdc5fbe38e1"
     }
   ],
+  "publication_note": "Publish .part1, .part2 and windows-download.json. Do not upload the full Windows ZIP; it is reconstructed by the page.",
   "excluded": [
+    "unsplit Windows ZIP",
     "build cache",
-    "local profile paths",
+    "personal profiles",
     "JAR binaries",
     "worlds",
     "accounts",
     "tokens",
-    "Xaero waypoints",
-    "raw local inventory",
-    "download cache"
+    "waypoints"
   ]
 }
