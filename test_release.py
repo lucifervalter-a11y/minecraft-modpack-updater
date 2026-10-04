@@ -103,6 +103,21 @@ class ReleaseTests(unittest.TestCase):
                 for name, value in original.items():
                     self.assertEqual((root / name).read_bytes(), value, name)
 
+    def test_receipt_time_format_is_ascii_for_english_windows(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / 'game'
+            root.mkdir()
+            manifest = u.load_manifest()
+            plan = u.inspect_profile(root, manifest)
+
+            def ascii_strftime(fmt, when):
+                self.assertTrue(fmt.isascii())
+                return '2026-10-04 20:00:00 UTC'
+
+            with patch.object(u.time, 'strftime', ascii_strftime):
+                receipt = u.verification_receipt(plan, manifest, 'Проверка без записи', 'fixture runtime')
+            self.assertIn('Проверено: 2026-10-04 20:00:00 UTC', receipt)
+
     def test_source_archive_is_reproducible_and_contains_no_jars(self):
         with tempfile.TemporaryDirectory() as directory:
             a = Path(directory) / 'a.zip'

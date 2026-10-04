@@ -8,7 +8,7 @@ import zipfile
 SOURCE_FILES = [
     'updater.py', 'native_http.py', 'manifest.json', 'Start.cmd', 'README.md',
     'LICENSE', 'test_updater.py', 'test_release.py', 'build_release.py',
-    'release_tools.py', 'split_download.py', 'requirements-build.txt', '.gitignore', 'VERIFICATION.json',
+    'release_tools.py', 'split_download.py', 'requirements-build.txt', '.gitignore', '.gitattributes', 'VERIFICATION.json',
 ]
 
 

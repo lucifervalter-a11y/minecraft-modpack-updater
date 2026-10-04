@@ -256,7 +256,7 @@ def verification_summary(plan, manifest):
     return summary
 
 def verification_receipt(plan, manifest, action, runtime, operation=''):
-    lines=['Minecraft Modpack Updater r9',time.strftime('Проверено: %Y-%m-%d %H:%M:%S UTC',time.gmtime()),
+    lines=['Minecraft Modpack Updater r9','Проверено: '+time.strftime('%Y-%m-%d %H:%M:%S UTC',time.gmtime()),
         'Действие: '+action,'Набор: '+manifest['release'],'Папка игры: '+str(plan['root']),
         'Папка модов: '+str(plan['root']/'mods'),f"JAR в выбранной папке: {plan['jar_count']}",
         verification_summary(plan,manifest),'Java / Forge: '+runtime]
