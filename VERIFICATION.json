@@ -1,311 +1,73 @@
 {
-  "unit_tests": {
-    "passed": 45,
-    "failed": 0
-  },
-  "official_downloads": [
+  "release": "r9",
+  "pack_release": "client-aem-ae2-2026-10-04-r9",
+  "base_commit": "21e76690f6e7c39f558317369c1931d84c376a34",
+  "manifest_sha256": "a0667d9465ae459dace0f27829dd2187b7190b1094e1aaffb5deb4cc6e5fd328",
+  "mods": 28,
+  "extras": 2,
+  "presets": 20,
+  "previous_26_mod_entries_unchanged": true,
+  "previous_extras_unchanged": true,
+  "previous_configs_unchanged": true,
+  "additions": [
     {
-      "file": "AdditionalEnchantedMiner-1.20.1-1201.1.136.jar",
-      "sha256": "2ea292c8597f14aa1c205b4c14e7efce78f1b58e2302c6b9e1c3f235a53b11f0",
-      "bytes": 1051803,
-      "status": "verified"
+      "name": "Applied Energistics 2",
+      "version": "15.4.11",
+      "file": "appliedenergistics2-forge-15.4.11.jar",
+      "bytes": 8501309,
+      "sha256": "f2ff9ee5122b037d4e93537425ab9fbe49860fc9c3977db13b20a50ca7d30f9e",
+      "sha512": "3a121b09c69c585bf1240f3526fc882f36d5e8c8242a9629e216de0c80e9ed212369db57026ec53856ba058635586edb103407855031bf4dcf1b2dfd4d60f78d",
+      "download_url": "https://cdn.modrinth.com/data/XxWD5pD3/versions/jYgSnxye/appliedenergistics2-forge-15.4.11.jar",
+      "official_page": "https://modrinth.com/mod/ae2/version/jYgSnxye",
+      "project_id": "XxWD5pD3",
+      "version_id": "jYgSnxye",
+      "license": "LicenseRef-Multiple",
+      "mod_ids": [
+        "ae2"
+      ],
+      "category": "mods",
+      "providers": []
     },
     {
-      "file": "appleskin-forge-mc1.20.1-2.5.1.jar",
-      "sha256": "e12419e43e3babc810af289403c5cd96bd7f09809b389acc6bb2f122b4b2a426",
-      "bytes": 47428,
-      "status": "verified"
-    },
-    {
-      "file": "Controlling-forge-1.20.1-12.0.2.jar",
-      "sha256": "cff8c3426a77f9e7412262b6d79e423979eff3831e010b3b1ea9677e1ecd74cd",
-      "bytes": 115280,
-      "status": "verified"
-    },
-    {
-      "file": "create-1.20.1-6.0.8.jar",
-      "sha256": "6fbb910c367dbce8e4fc7e5bf64b6edd4de980906ed00af8e47e4af843c0d9b0",
-      "bytes": 19170905,
-      "status": "verified"
-    },
-    {
-      "file": "create_connected-1.2.3-mc1.20.1-all.jar",
-      "sha256": "5f584f118f2bda3dfeed8b8fc9198ea143c6988e2f6f04eb63f42c0da8b50e63",
-      "bytes": 6791072,
-      "status": "verified"
-    },
-    {
-      "file": "createaddition-1.20.1-1.3.3.jar",
-      "sha256": "9bf3ae15d86ec95d128542caf10e4b5498e49ca02f725b9302d6daecd5eae1db",
-      "bytes": 1577313,
-      "status": "verified"
-    },
-    {
-      "file": "do_a_barrel_roll-forge-3.5.61.20.1.jar",
-      "sha256": "71ffc54d3f1fbe9497cf7b398c79a2724c60f7b06809941e9ded0888587347af",
-      "bytes": 625488,
-      "status": "verified"
-    },
-    {
-      "file": "embeddium-0.3.31_mc1.20.1.jar",
-      "sha256": "eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb",
-      "bytes": 1320675,
-      "status": "verified"
-    },
-    {
-      "file": "FarmersDelight-1.20.1-1.3.4.jar",
-      "sha256": "34f03eb671ea1ca579b00c98e4541404cb96d1a292014aed9cc5eb45ad8afbce",
-      "bytes": 3311051,
-      "status": "verified"
-    },
-    {
-      "file": "InventoryProfilesNext-forge-1.20-1.10.20.jar",
-      "sha256": "2f664f23ed031f6cfacce01b0461c450e2248435936cb6b7e2e0463c6ec56343",
-      "bytes": 1457354,
-      "status": "verified"
-    },
-    {
-      "file": "Jade-1.20.1-Forge-11.13.3.jar",
-      "sha256": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
-      "bytes": 553487,
-      "status": "verified"
-    },
-    {
-      "file": "jei-1.20.1-forge-15.56.0.205.jar",
-      "sha256": "6b251e60a4719c874da89d750af97aa6498f6f4475e3ae79cb1288c7bf0cb65c",
-      "bytes": 1778129,
-      "status": "verified"
-    },
-    {
-      "file": "kotlinforforge-4.12.0-all.jar",
-      "sha256": "6a66c6a68ec09f8717cdbf06883394f0ee24d7cd826b7134a0f81839e8e720ae",
-      "bytes": 7442998,
-      "status": "verified"
-    },
-    {
-      "file": "libIPN-forge-1.20-4.0.2.jar",
-      "sha256": "cb96fa15eddc74c243677f7f5b6e3ecaa87bb33f4854ae0353646f304058add6",
-      "bytes": 693301,
-      "status": "verified"
-    },
-    {
-      "file": "MouseTweaks-forge-mc1.20.1-2.25.1.jar",
-      "sha256": "6c27d16aa715ac6613a55fc463739e2c7b78279e4e4c4cede299e4a2d4a70f08",
-      "bytes": 76237,
-      "status": "verified"
-    },
-    {
-      "file": "oculus-mc1.20.1-1.8.0.jar",
-      "sha256": "0945df0cba0f62b3901dd80c3268e5311b770ece78c78037a45db12ac0425fef",
-      "bytes": 2851119,
-      "status": "verified"
-    },
-    {
-      "file": "ScalableCatsForce-3.3.1-build-0-with-library.jar",
-      "sha256": "4ae39dc3029d8bc4292d55ff20368b7eb69b050af24ebaa487594ab61665da81",
-      "bytes": 15852918,
-      "status": "verified"
-    },
-    {
-      "file": "Searchables-forge-1.20.1-1.0.3.jar",
-      "sha256": "461add180eb595004d3c9f5ac0ce337752e403077f96b38304800eadf01fb825",
-      "bytes": 77732,
-      "status": "verified"
-    },
-    {
-      "file": "ServerTabInfo-1.20-1.3.8.jar",
-      "sha256": "d25428542f15a1437613553902513b8a11d09e02266c223f15a70b5e8f778ae7",
-      "bytes": 103637,
-      "status": "verified"
-    },
-    {
-      "file": "sliceanddice-forge-3.6.0.jar",
-      "sha256": "bafdcbeda044603b59eb16059829a6698c1a58d1ce865b8658e598f2718d315a",
-      "bytes": 588268,
-      "status": "verified"
-    },
-    {
-      "file": "upgrader-forge-1.2.1-1.20.1.jar",
-      "sha256": "b145adbf1f47e9d63746eb0f47c503e23acf6a4e627d306b2209c3a657e67a75",
-      "bytes": 279141,
-      "status": "verified"
-    },
-    {
-      "file": "xaerominimap-forge-1.20.1-26.5.0.jar",
-      "sha256": "b21e1b4a13de533d0cf57d55969d5c83b3da78e8be44b93e76cddea9f6503d19",
-      "bytes": 2195399,
-      "status": "verified"
-    },
-    {
-      "file": "xaeroworldmap-forge-1.20.1-1.46.0.jar",
-      "sha256": "e00bd87a949cfa8c31d571f4d9646db038e3b98f8cdbb7bd217f3fb9c3780c9e",
-      "bytes": 1425022,
-      "status": "verified"
-    },
-    {
-      "file": "BSL_v10.1.5.zip",
-      "sha256": "1038c018934c43018f9517e326c0cafcf8a3fb83db0d2cce0697fa8ee1289838",
-      "bytes": 1133936,
-      "status": "verified"
-    },
-    {
-      "file": "MPLOCmods_v40.1.zip",
-      "sha256": "3e604621a6c9356fb2e676d7b8038cb07c8abdd430abdfe1eccc9afae99dcb90",
-      "bytes": 10376553,
-      "status": "verified"
-    },
-    {
-      "file": "inventoryhud.forge.1.20.1-3.4.26.jar",
-      "sha1": "f0adda10a3d6549e6dfdffd41e72270c61c8a302",
-      "sha256": "01d9a2d1e26fffff78eb47f3e4837189e7567dde849810b1bf6d278520c1e971",
-      "sha512": "69698f4b505d070b097fab6b7bde508f8de138137f5825ed6601601a02b3a8876a4ad2f93f25667a6579367dd20dc3a5ae0465a4957bd5740a12668d6b3ad725",
-      "bytes": 238088,
-      "status": "verified"
-    },
-    {
-      "file": "justzoom_forge_2.1.1_MC_1.20.1.jar",
-      "sha1": "8bbcdfb61e9f0f738af0efff12c93b8f9daf2fb0",
-      "sha256": "778c75c388a8dffed5bfad25ab9a420dfd6c4ec3bdc1699ec6c2bab2336b5040",
-      "sha512": "f74d01e2085f3242029dfc4dc0b49599679e36334c1dc0fcb76e75f229f49705ef0538cc06004ee6e4e909c7ff027be818a4daf5cf9c7437537e6adc754d2879",
-      "bytes": 204574,
-      "status": "verified"
-    },
-    {
-      "file": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
-      "sha1": "2019d821bed9071daabed43979433a5473ceee49",
-      "sha256": "e78686b92c3761ec26eb9d3c53efdd3d6ca77981cbd3723995e1163b7103ae0b",
-      "sha512": "df79a0c64da14ca2b27dc04a72d85ce5c8e7c498e7b72da4d7bfddd592bb4bac165e70afe33fac97446e4996fffd8003350df07ede2a77233dddec77b8ff0ee7",
-      "bytes": 625185,
-      "status": "verified"
+      "name": "GuideME",
+      "version": "20.1.15",
+      "file": "guideme-20.1.15.jar",
+      "bytes": 9414827,
+      "sha256": "cf8052ab3da121012efc59a20e731c24bfe7488dfa556c9b88809f42dea3b24a",
+      "sha512": "c08f2ab76b4442a5fcdd19c7ddc6e2a4c74469fd96844d2f868f2fb18517aced97bf40032c3036f7ca4b094de1ded9e3dab57924a49f3a3d499b61a0ecc2a9cc",
+      "download_url": "https://cdn.modrinth.com/data/Ck4E7v7R/versions/i7Tp1AHw/guideme-20.1.15.jar",
+      "official_page": "https://modrinth.com/mod/guideme/version/i7Tp1AHw",
+      "project_id": "Ck4E7v7R",
+      "version_id": "i7Tp1AHw",
+      "license": "LicenseRef-Multiple-OSS-Licenses",
+      "mod_ids": [
+        "guideme"
+      ],
+      "category": "mods",
+      "providers": []
     }
   ],
-  "full_fixture": {
-    "official_artifacts": 28,
-    "safe_presets": 20,
-    "fresh_install": "PASS",
-    "r6_upgrade_downloads_only_3_new_mods": "PASS",
-    "original_23_mods_2_extras_19_presets": "UNCHANGED",
-    "idempotent_second_run": "PASS",
-    "rollback": "PASS",
-    "existing_HUD_config_and_custom_keys": "UNCHANGED",
-    "private_and_unmanaged_sentinels": "UNCHANGED",
-    "live_profile_written": false,
-    "NAS_accessed": false,
-    "in_game_visual_acceptance": "NOT RUN"
+  "static_compatibility": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.10",
+    "java": 17,
+    "ae2_requires_guideme": "[20.1.7,20.2.0)",
+    "ae2_requires_forge": "[47.1.3,)",
+    "guideme_requires_forge": "[47.1.0,)",
+    "max_class_major": 61,
+    "official_sha1_sha512_verified": true
   },
-  "browser": {
-    "checks": [
-      "28 official-source rows rendered",
-      "Both launcher selectors and instructions",
-      "Both download archives and SHA256 return HTTP 200",
-      "Unsupported browser fallback",
-      "Cancel produces no changes",
-      "Explicit folder check hashes JAR correctly without writes",
-      "390px mobile layout has no horizontal overflow"
-    ],
-    "errors": []
+  "source_tests": {
+    "run": 50,
+    "passed": 48,
+    "skipped": 2,
+    "result": "PASS",
+    "environment": "Linux; Windows-only tests deferred to CI"
   },
-  "live_inventory_read_only": {
-    "matching": 25,
-    "conflicts": 0,
-    "unresolved": 0,
-    "writes": 0,
-    "release_checked": "r6; no live r7 profile changes or game launch"
-  },
-  "exe_self_test": "PASS",
-  "privacy_audit": "PASS; source, nested ZIP and embedded EXE archives checked",
-  "publication": {
-    "repository": "https://github.com/lucifervalter-a11y/minecraft-modpack-updater",
-    "owner": "parent agent",
-    "pages_live_url_verified": false
-  },
-  "split_download": {
-    "checks": [
-      "No archive-part downloads before explicit button click",
-      "One click saves valid Windows ZIP with original exact bytes and SHA256",
-      "Desktop/mobile download button and completion status fit",
-      "Corrupt part rejected by SHA256 without saving any ZIP",
-      "Missing second part stops download and allows retry",
-      "Whole-archive SHA256 independently verified after both parts pass"
-    ],
-    "errors": [],
-    "assembled_sha256": "f2811fe903fb4fd4359f4f4a5ed7dbccfdf2c1a6e17e64cd39d0aa353929c6b4",
-    "modpack_manifest_sha256": "c7242af5d845af5a9f9a940501d857a7d1d5f4b94810f2bb81f411dae11ac173"
-  },
-  "runtime_auto": {
-    "folder_candidates": 7,
-    "multiple_candidates_require_selection": "PASS",
-    "candidate_labels_include_mod_count": true,
-    "automatic_java17_selection": "PASS",
-    "automatic_forge_selection": "PASS",
-    "explicit_folder_selection": "PASS",
-    "install_button_visible_at_minimum_window": "PASS",
-    "title_identifies_release": true,
-    "install_invoked": false,
-    "java_version": "17.0.15",
-    "windowed_exe_java17_forge_exit_code": 0,
-    "real_java_version": "Microsoft 17.0.15",
-    "java21_excluded": true,
-    "gui_provenance": "runtime chooser verified in r7; r8 GUI independently covered by friend_profile_regression",
-    "exe_provenance": "r8 packaged EXE Java17/Forge self-test"
-  },
-  "official_default_game_directory": {
-    "supported": ".minecraft",
-    "launcher_accounts_saves_preserved": "PASS",
-    "launcher_account_json_not_read": "PASS",
-    "preview_before_apply": true,
-    "new_directory_optional": true
-  },
-  "release": "r8",
-  "packaged_exe": {
-    "--self-test-java17": 0,
-    "--self-test-folders": 0,
-    "--self-test-download": 0,
-    "official_https": "WinHTTP download, byte count and SHA256 verified inside frozen EXE",
-    "live_profile_written": false
-  },
-  "windows_https": {
-    "transport": "WinHTTP / SChannel",
-    "certificate_validation": "Windows trust, hostname, validity and revocation checks enabled",
-    "certificate_ignore_flags": false,
-    "official_download_sha256_verified": true,
-    "failure_log": "domain, Windows code, TLS flags and reason; no full URL or personal paths",
-    "friend_network_retested": false
-  },
-  "client_extensions": {
-    "new_mods": [
-      "Inventory HUD+ 3.4.26",
-      "Just Zoom 2.1.1",
-      "Konkrete 1.8.0"
-    ],
-    "sha1_and_sha512_match_official_catalog": true,
-    "java_class_major": 61,
-    "forge_47_4_10_dependency_ranges": "PASS",
-    "required_konkrete_dependency": "SATISFIED",
-    "inventoryhud_no_mixins": true,
-    "zoom_default_Z_hold_and_wheel": "Verified in pinned official source JAR",
-    "existing_configs_and_keys": "Preserved",
-    "embeddium_oculus": "No declared dependency incompatibility; rendering/mixin cooperation not proven by metadata",
-    "in_game_visual_acceptance": "NOT RUN"
-  },
-  "friend_profile_regression": {
-    "profile_versions_Mods_discovered": "PASS",
-    "inner_mods_not_selected_as_game_directory": "PASS",
-    "two_candidates_require_choice": "PASS",
-    "missing_mods_summary_18_of_26": "PASS",
-    "full_receipt_contains_target_AEM_and_Upgrader": "PASS",
-    "stale_results_clear_on_folder_change": "PASS",
-    "install_and_receipt_buttons_visible_at_minimum_size": "PASS",
-    "static_success_header_removed": "PASS",
-    "fixture_jar_count_unchanged": true,
-    "live_profile_written": false,
-    "system_clipboard_used": false
-  },
-  "final_install_verification": {
-    "all_manifest_files_rehashed_before_success": true,
-    "concurrent_removal_after_individual_write": "FAILS SAFELY AND ROLLS BACK",
-    "check_vs_install_distinguished": true,
-    "receipt_includes_explicit_target_and_all_component_statuses": true,
-    "active_game_directory_inferred_from_forge_metadata": false
-  }
+  "windows_build": "PENDING; see BUILD-VERIFICATION.json from exact CI commit",
+  "in_game_test": "NOT RUN",
+  "NAS_install": "NOT PERFORMED",
+  "publication": "NOT PERFORMED",
+  "source_self_test": "PASS",
+  "python_compile": "PASS"
 }

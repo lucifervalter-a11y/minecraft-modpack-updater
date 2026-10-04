@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "release": "client-aem-2026-10-03.2-r7",
+  "release": "client-aem-ae2-2026-10-04-r9",
   "minecraft": "1.20.1",
   "forge": "47.4.10",
   "java": 17,
@@ -468,6 +468,42 @@
       "license": "Apache-2.0",
       "mod_ids": [
         "konkrete"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "Applied Energistics 2",
+      "version": "15.4.11",
+      "file": "appliedenergistics2-forge-15.4.11.jar",
+      "bytes": 8501309,
+      "sha256": "f2ff9ee5122b037d4e93537425ab9fbe49860fc9c3977db13b20a50ca7d30f9e",
+      "sha512": "3a121b09c69c585bf1240f3526fc882f36d5e8c8242a9629e216de0c80e9ed212369db57026ec53856ba058635586edb103407855031bf4dcf1b2dfd4d60f78d",
+      "download_url": "https://cdn.modrinth.com/data/XxWD5pD3/versions/jYgSnxye/appliedenergistics2-forge-15.4.11.jar",
+      "official_page": "https://modrinth.com/mod/ae2/version/jYgSnxye",
+      "project_id": "XxWD5pD3",
+      "version_id": "jYgSnxye",
+      "license": "LicenseRef-Multiple",
+      "mod_ids": [
+        "ae2"
+      ],
+      "category": "mods",
+      "providers": []
+    },
+    {
+      "name": "GuideME",
+      "version": "20.1.15",
+      "file": "guideme-20.1.15.jar",
+      "bytes": 9414827,
+      "sha256": "cf8052ab3da121012efc59a20e731c24bfe7488dfa556c9b88809f42dea3b24a",
+      "sha512": "c08f2ab76b4442a5fcdd19c7ddc6e2a4c74469fd96844d2f868f2fb18517aced97bf40032c3036f7ca4b094de1ded9e3dab57924a49f3a3d499b61a0ecc2a9cc",
+      "download_url": "https://cdn.modrinth.com/data/Ck4E7v7R/versions/i7Tp1AHw/guideme-20.1.15.jar",
+      "official_page": "https://modrinth.com/mod/guideme/version/i7Tp1AHw",
+      "project_id": "Ck4E7v7R",
+      "version_id": "i7Tp1AHw",
+      "license": "LicenseRef-Multiple-OSS-Licenses",
+      "mod_ids": [
+        "guideme"
       ],
       "category": "mods",
       "providers": []

@@ -20,7 +20,7 @@ import uuid
 import zipfile
 
 BASE = Path(getattr(sys, '_MEIPASS', Path(__file__).parent))
-MANIFEST_SHA256 = 'c7242af5d845af5a9f9a940501d857a7d1d5f4b94810f2bb81f411dae11ac173'
+MANIFEST_SHA256 = 'a0667d9465ae459dace0f27829dd2187b7190b1094e1aaffb5deb4cc6e5fd328'
 MANAGER = '.modpack-updater'
 STATE = MANAGER + '/state.json'
 SERVICE = 'META-INF/services/net.minecraftforge.forgespi.language.IModLanguageProvider'
@@ -142,7 +142,7 @@ def download(spec, dest):
             except OSError:pass
             raise SafetyError(f'Загрузка с {host} остановлена. WinHTTP {error.code}: {error.reason}. Проверка сертификатов сохранена. Проверьте дату Windows, обновления сертификатов и доступ к этому домену через свою сеть. Диагностика: download-error.json в папке backup этой операции. Отключать TLS-проверку не нужно.') from error
     else:
-        request=urllib.request.Request(spec['download_url'],headers={'User-Agent':'MinecraftModpackUpdater/r8'})
+        request=urllib.request.Request(spec['download_url'],headers={'User-Agent':'MinecraftModpackUpdater/r9'})
         opener=urllib.request.build_opener(NoRedirect());size=0
         with opener.open(request,timeout=45) as response, dest.open('xb') as output:
             while block:=response.read(1024*1024):
@@ -256,7 +256,7 @@ def verification_summary(plan, manifest):
     return summary
 
 def verification_receipt(plan, manifest, action, runtime, operation=''):
-    lines=['Minecraft Modpack Updater r8',time.strftime('Проверено: %Y-%m-%d %H:%M:%S UTC',time.gmtime()),
+    lines=['Minecraft Modpack Updater r9',time.strftime('Проверено: %Y-%m-%d %H:%M:%S UTC',time.gmtime()),
         'Действие: '+action,'Набор: '+manifest['release'],'Папка игры: '+str(plan['root']),
         'Папка модов: '+str(plan['root']/'mods'),f"JAR в выбранной папке: {plan['jar_count']}",
         verification_summary(plan,manifest),'Java / Forge: '+runtime]
@@ -689,11 +689,11 @@ def gui():
     from tkinter import ttk,filedialog,messagebox
     import threading,queue
     m=load_manifest()
-    window=tk.Tk(); window.title('Minecraft • Обновлятор r8 • Проверка сборки'); window.geometry('990x870'); window.minsize(850,790)
+    window=tk.Tk(); window.title('Minecraft • Обновлятор r9 • Проверка сборки'); window.geometry('990x870'); window.minsize(850,790)
     style=ttk.Style(); style.theme_use('clam'); style.configure('.',font=('Segoe UI',10)); style.configure('Title.TLabel',font=('Segoe UI',21,'bold'))
     frame=ttk.Frame(window,padding=18); frame.pack(fill='both',expand=True)
     ttk.Label(frame,text='Проверка и обновление сборки',style='Title.TLabel').pack(anchor='w')
-    ttk.Label(frame,text='Minecraft 1.20.1  •  Forge 47.4.10  •  Java 17  •  26 модов',padding=(0,8,0,16)).pack(anchor='w')
+    ttk.Label(frame,text='Minecraft 1.20.1  •  Forge 47.4.10  •  Java 17  •  28 модов',padding=(0,8,0,16)).pack(anchor='w')
     launcher=tk.StringVar(value='Все лаунчеры'); folder=tk.StringVar(); java=tk.StringVar(); version=tk.StringVar()
     folder_view=tk.StringVar(value='Ищем установленные сборки…');folder_scope=[None]
     folder_note=tk.StringVar(value='Папки будут найдены автоматически. Запись начнётся только после подтверждения.')

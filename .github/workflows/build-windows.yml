@@ -1,0 +1,43 @@
+name: Build Windows updater
+on:
+  workflow_dispatch:
+  push:
+    branches: [ae2-r9-build]
+permissions:
+  contents: read
+concurrency:
+  group: windows-updater-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - name: Check out exact commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.11'
+          architecture: x64
+      - name: Install pinned builder from PyPI
+        run: python -m pip install --disable-pip-version-check -r requirements-build.txt
+      - name: Test, build and verify packaged manifest
+        run: python build_release.py
+      - name: Upload verified release files
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: minecraft-updater-r9-${{ github.sha }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            docs/downloads/Minecraft-Modpack-Updater-Windows.zip
+            docs/downloads/Minecraft-Modpack-Updater-Windows.zip.part1
+            docs/downloads/Minecraft-Modpack-Updater-Windows.zip.part2
+            docs/downloads/Minecraft-Modpack-Updater-Source.zip
+            docs/downloads/SHA256SUMS.txt
+            docs/downloads/windows-download.json
+            docs/downloads/BUILD-VERIFICATION.json
+            PUBLIC-FILES.json
